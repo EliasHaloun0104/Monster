@@ -24,10 +24,11 @@ public class EnemyGenerator {
             int random;
             do
                 random = MathUtils.random(1,48-1);
-            while (random != 5 && random!=42);
-
-            }
+            while (random == 5 || random==42);
+            blockButtons.get(random).setEnemy(1);
             numberOfEnemy--;
+            }
+
     }
 }
 

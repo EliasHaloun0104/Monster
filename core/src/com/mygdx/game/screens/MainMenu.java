@@ -61,7 +61,7 @@ public class MainMenu implements Screen {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     switch (finalI){
                         case 0:
-                            MainGame.getInstance().setScreen(new Level());
+                            MainGame.getInstance().setScreen(new Play());
                             break;
                         case 1:
                             MainGame.getInstance().setScreen(new InstructionScreen());

@@ -25,11 +25,13 @@ import static com.mygdx.game.main.Constant.MAX_COLUMN;
 import static com.mygdx.game.main.Constant.MAX_RAW;
 
 
-public class Level implements Screen {
+public class Play implements Screen {
     private ViewManager viewManager;
     private SpriteBatch batch;
     private Texture background;
     private BitmapFont font;
+    private BitmapFont greenFont;
+    private BitmapFont redFont;
 
     private EnemyGenerator enemyGenerator;
     private Array<Ball> balls;
@@ -51,6 +53,7 @@ public class Level implements Screen {
         MainGame.getInstance().resetScore();
         render= false;
         font = new BitmapFont();
+        font.setColor(Color.WHITE);
         balls = new Array<>();
         blockButtons = new Array<>();
 
@@ -62,17 +65,16 @@ public class Level implements Screen {
         }
 
         balls.add(new Ball());
-        balls.add(new Ball());
-        balls.add(new Ball());
-        balls.add(new Ball());
-        balls.add(new Ball());
+
+
+
+        enemyGenerator = new EnemyGenerator(1,3,5000);
 
 
         //enemyGenerator = new EnemyGenerator(1, 50);
 
         batch = new SpriteBatch();
-        font = new BitmapFont();
-        font.setColor(Color.RED);
+
         background = new Texture("background2.png");
 
         stage = new Stage(viewManager.getViewport());
@@ -125,9 +127,6 @@ public class Level implements Screen {
 
         //Draw ball over stage
         batch.begin();
-        for (int i = 0; i < blockButtons.size  ; i++) {
-            font.draw(batch, String.valueOf(i), blockButtons.get(i).getX(), blockButtons.get(i).getY());
-        }
         for (Ball b: balls) {
             b.draw(batch);
         }
@@ -138,6 +137,8 @@ public class Level implements Screen {
         for (Ball b: balls) {
             b.ballMoving(blockButtons);
         }
+        //Update enemy
+        enemyGenerator.createEnemy(blockButtons);
 
     }
 

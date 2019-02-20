@@ -27,6 +27,7 @@ public class BlockButton extends Button{
                 return true;
             }
         });
+        numberOfStrike = 0;
     }
 
     public int getRef() {
@@ -38,11 +39,13 @@ public class BlockButton extends Button{
     }
 
     private void updateTexture(){
-        ref++;
-        if(ref == images.length-1){
-            ref = 0;
+        if(ref !=5) {
+            ref++;
+            if (ref == images.length - 1) {
+                ref = 0;
+            }
+            super.setImage(images[ref]);
         }
-        super.setImage(images[ref]);
     }
 
     public void counterStrike(){
@@ -52,6 +55,12 @@ public class BlockButton extends Button{
             super.setImage(images[0]);
         }
         MainGame.getInstance().addToScore();
+    }
+
+    public void setEnemy(int numberOfStrike){
+        this.numberOfStrike += numberOfStrike;
+        ref = 5;
+        super.setImage(images[ref]);
     }
 
     public int getX(){
