@@ -22,19 +22,19 @@ public class EnemyGenerator {
         level = 1;
     }
 
-    public void createEnemy(Range range, HashMap<Pair, Block> blockHashMap) {
+    public void createEnemy(HashMap<Pair, BlockButton> blockHashMap) {
         if (TimeUtils.millis()> time + millisBetween) {
             int i = 0;
             while (i < enemyPerX_Sec) {
-                int randomX = MathUtils.random(range.getFromX(), range.getToX() - 1);
-                int randomY = MathUtils.random(range.getFromY(), range.getToY() - 1);
-                boolean bol_1 = randomX == range.getFromX() || randomX == range.getToX() - 1;
-                boolean bol_2 = randomY == range.getFromY() || randomY == range.getToY() - 1;
-                if (!(bol_1 && bol_2)) {
-                    Pair p = new Pair(randomX, randomY);
-                    blockHashMap.get(p).setToEnemyMode(strikeNumber);
+                //int randomX = MathUtils.random(range.getFromX(), range.getToX() - 1);
+                //int randomY = MathUtils.random(range.getFromY(), range.getToY() - 1);
+                //boolean bol_1 = randomX == range.getFromX() || randomX == range.getToX() - 1;
+                //boolean bol_2 = randomY == range.getFromY() || randomY == range.getToY() - 1;
+                //if (!(bol_1 && bol_2)) {
+                    //Pair p = new Pair(randomX, randomY);
+                    //blockHashMap.get(p).setToEnemyMode(strikeNumber);
                     i++;
-                }
+                //}
             }
             time = TimeUtils.millis();
             callCounter++;

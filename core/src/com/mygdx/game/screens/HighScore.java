@@ -16,13 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.game.Button_Back;
+import com.mygdx.game.game.BackButton;
 import com.mygdx.game.game.Player;
 import com.mygdx.game.main.Assets;
 import com.mygdx.game.main.MainGame;
 
-import static com.mygdx.game.main.Constant.BLOCK_HEIGHT;
-import static com.mygdx.game.main.Constant.BLOCK_WIDTH;
+import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 
 
 public class HighScore implements Screen {
@@ -35,12 +34,14 @@ public class HighScore implements Screen {
     private BitmapFont font;
     private ImageButton gameButton;
 
+    //TODO replace prefs by database
+
     Preferences prefs;
     Array<Player> players;
 
     private int indexOfScore;
 
-    private Button_Back buttonBack;
+    private BackButton buttonBack;
 
 
 
@@ -58,13 +59,13 @@ public class HighScore implements Screen {
         float xPos = Gdx.graphics.getWidth()/2;
         TextureRegionDrawable image_1 = new TextureRegionDrawable(Assets.getInstance().getRegion("submitName",-1));
         gameButton = new ImageButton(image_1);
-        gameButton.setPosition(xPos-BLOCK_WIDTH*2, yPos);
+        gameButton.setPosition(xPos-BLOCK_SIZE*2, yPos);
 
         background = new Texture("background.png");
         font = new BitmapFont();
         font.setColor(Color.RED);
 
-        buttonBack = new Button_Back();
+        buttonBack = new BackButton();
 
         textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.font = font;
@@ -120,9 +121,8 @@ public class HighScore implements Screen {
         batch.begin();
         batch.draw(background,0,0);
         for (int i = 0; i < players.size ; i++) {
-            font.draw(batch, players.get(i).toString(), BLOCK_WIDTH, BLOCK_HEIGHT*6 - i*BLOCK_HEIGHT/2);
+            font.draw(batch, players.get(i).toString(), BLOCK_SIZE, BLOCK_SIZE*6 - i*BLOCK_SIZE/2);
         }
-        buttonBack.draw(batch);
         batch.end();
 
         stage.draw();

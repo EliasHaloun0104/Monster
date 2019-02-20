@@ -16,8 +16,7 @@ import com.mygdx.game.game.Button;
 import com.mygdx.game.main.Assets;
 import com.mygdx.game.main.MainGame;
 
-import static com.mygdx.game.main.Constant.BLOCK_HEIGHT;
-import static com.mygdx.game.main.Constant.BLOCK_WIDTH;
+import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 
 public class MainMenu implements Screen {
     private SpriteBatch batch;
@@ -38,7 +37,7 @@ public class MainMenu implements Screen {
         buttons = new Array<Button>();
         courser = 0;
         stage = new Stage();
-        float xPos = (Gdx.graphics.getWidth()/4- BLOCK_WIDTH*3);
+        float xPos = (Gdx.graphics.getWidth()/4- BLOCK_SIZE*3);
 
         buttons.add(new Button("startButton", -1));
         buttons.add(new Button("loadButton", -1));
@@ -49,7 +48,7 @@ public class MainMenu implements Screen {
 
         for (int i = 0; i < buttons.size ; i++) {
             final Button b = buttons.get(i);
-            b.getBtn().setPosition(xPos + i%2*BLOCK_WIDTH*2, BLOCK_HEIGHT*(5-i));
+            b.getBtn().setPosition(xPos + i%2*BLOCK_SIZE*2, BLOCK_SIZE*(5-i));
             final int finalI = i;
             b.getBtn().addListener(new InputListener(){
                 @Override
@@ -85,7 +84,7 @@ public class MainMenu implements Screen {
 
 
         courserImage = new Sprite(Assets.getInstance().getRegion("courser", -1));
-        courserImage.setPosition(xPos, BLOCK_HEIGHT*5);
+        courserImage.setPosition(xPos, BLOCK_SIZE*5);
 
 
 
@@ -102,7 +101,7 @@ public class MainMenu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(background,0,0);
+        batch.draw(background,0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
 
         stage.draw();

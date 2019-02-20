@@ -1,5 +1,6 @@
 package com.mygdx.game.game;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.main.Assets;
@@ -12,9 +13,20 @@ public class Button {
     public Button(String regionalTexture, int index) {
         textureRegionDrawable = new TextureRegionDrawable(Assets.getInstance().getRegion(regionalTexture, index));
         btn = new ImageButton(textureRegionDrawable);
+
     }
 
     public ImageButton getBtn() {
         return btn;
+    }
+
+    public void setImage(String regionalTexture){
+        textureRegionDrawable = new TextureRegionDrawable(Assets.getInstance().getRegion(regionalTexture,-1));
+        btn.getStyle().imageUp = textureRegionDrawable;
+
+    }
+
+    public void addToStage(Stage stage){
+        stage.addActor(btn);
     }
 }

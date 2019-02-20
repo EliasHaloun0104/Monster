@@ -4,9 +4,7 @@ package com.mygdx.game.game;
 
 import java.util.Objects;
 
-import static com.mygdx.game.main.Constant.BLOCK_HEIGHT;
-import static com.mygdx.game.main.Constant.BLOCK_WIDTH;
-
+import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 
 public class Pair {
     private int x;
@@ -64,11 +62,20 @@ public class Pair {
     }
 
     public boolean inCenter(){
-        return x%BLOCK_WIDTH == 0 && y%BLOCK_HEIGHT==0;
+        return x%BLOCK_SIZE == 0 && y%BLOCK_SIZE==0;
     }
 
     public boolean inEdge(){
-        return x%(BLOCK_WIDTH/2) == 0 && y%(BLOCK_HEIGHT/2) == 0 && (x%BLOCK_WIDTH == 0 || y%BLOCK_HEIGHT==0);
+        return (x%(BLOCK_SIZE/2) == 0 && y%BLOCK_SIZE == 0)||
+                (x%BLOCK_SIZE == 0 && y%(BLOCK_SIZE/2)==0);
+    }
+
+    public boolean inEdgeHor(){
+        return  x%(BLOCK_SIZE/2) == 0 && y%BLOCK_SIZE == 0;
+    }
+
+    public boolean inEdgeVer(){
+        return  x%(BLOCK_SIZE) == 0 && y%(BLOCK_SIZE/2) == 0;
     }
 
 
