@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.game.BackButton;
 import com.mygdx.game.game.Player;
 import com.mygdx.game.main.Assets;
 import com.mygdx.game.main.MainGame;
@@ -41,10 +40,6 @@ public class HighScore implements Screen {
 
     private int indexOfScore;
 
-    private BackButton buttonBack;
-
-
-
 
     @Override
     public void show() {
@@ -65,8 +60,6 @@ public class HighScore implements Screen {
         font = new BitmapFont();
         font.setColor(Color.RED);
 
-        buttonBack = new BackButton();
-
         textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.font = font;
         textFieldStyle.fontColor = Color.RED;
@@ -78,7 +71,6 @@ public class HighScore implements Screen {
         textField.setPosition(gameButton.getX(),yPos+70);
         stage.addActor(gameButton);
         stage.addActor(textField);
-        stage.addActor(buttonBack.getBtn());
 
 
 

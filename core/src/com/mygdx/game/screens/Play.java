@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -12,12 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.game.Ball;
 import com.mygdx.game.game.BlockButton;
-import com.mygdx.game.game.BackButton;
 import com.mygdx.game.game.Button;
-import com.mygdx.game.game.EnemyGenerator;
-import com.mygdx.game.main.MainGame;
 import com.mygdx.game.main.ViewManager;
 
 import static com.mygdx.game.main.Constant.BLOCK_SIZE;
@@ -26,83 +23,67 @@ import static com.mygdx.game.main.Constant.MAX_RAW;
 
 
 public class Play implements Screen {
-    private ViewManager viewManager;
     private SpriteBatch batch;
-    private Texture background;
+
+    //Fonts
     private BitmapFont font;
     private BitmapFont greenFont;
     private BitmapFont redFont;
 
-    private EnemyGenerator enemyGenerator;
-    private Array<Ball> balls;
-    private boolean render;
-
-    private Array<BlockButton> blockButtons;
-
-    private Button ballButton;
-    private BackButton backButton;
+    private ViewManager viewManager;
     private Stage stage;
 
+    private Texture background;
 
+
+    private LevelDetails levelDetails;
+
+
+    //Buttons
+    private Array<BlockButton> blockButtons;
+    private Button ballButton;
 
     @Override
     public void show() {
-        int x = Gdx.graphics.getWidth();
-        int y = Gdx.graphics.getHeight();
-        viewManager = new ViewManager(0,0,x,y);
-        MainGame.getInstance().resetScore();
-        render= false;
+        batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.WHITE);
-        balls = new Array<>();
-        blockButtons = new Array<>();
 
+        viewManager = new ViewManager(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        stage = new Stage(viewManager.getViewport());
 
-        for (int i = 0; i < MAX_COLUMN; i++) {
-            for (int j = 0; j < MAX_RAW; j++) {
-                blockButtons.add(new BlockButton(0, (i+6)*BLOCK_SIZE, (j+1)*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE));
-            }
-        }
+        levelDetails = new LevelDetails(1,3, 2, 5000);
 
-        balls.add(new Ball());
-
-
-
-        enemyGenerator = new EnemyGenerator(1,3,5000);
-
-
-        //enemyGenerator = new EnemyGenerator(1, 50);
-
-        batch = new SpriteBatch();
 
         background = new Texture("background2.png");
 
-        stage = new Stage(viewManager.getViewport());
 
-        backButton = new BackButton();
-        backButton.addToStage(stage);
-
-
-        ballButton = new Button("restartButton",-1);
+        ballButton = new Button("block",-1);
         ballButton.getBtn().setPosition(14*BLOCK_SIZE, BLOCK_SIZE);
         ballButton.getBtn().addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-            //TODO lunch new Ball
+                levelDetails.generateBall();
             return true;
 
             }
         });
         ballButton.addToStage(stage);
-
-        for (BlockButton b: blockButtons) {
-            b.addToStage(stage);
+        blockButtons = new Array<>();
+        BlockButton temp;
+        for (int i = 0; i < MAX_COLUMN; i++) {
+            for (int j = 0; j < MAX_RAW; j++) {
+                temp =  new BlockButton(0, (i+6)*BLOCK_SIZE, (j+1)*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+                blockButtons.add(temp);
+                temp.addToStage(stage);
+            }
         }
 
 
         InputMultiplexer multiplexer = new InputMultiplexer();
         Gdx.input.setInputProcessor(multiplexer);
         multiplexer.addProcessor(stage);
+        Gdx.input.setCatchBackKey(true);
     }
 
     @Override
@@ -113,33 +94,21 @@ public class Play implements Screen {
 
         batch.begin();
         batch.draw(background,0,0);
-
-        for (Ball b: balls) {
-            b.draw(batch);
-        }
-
-
-
-
         batch.end();
+
         stage.draw();
         stage.act();
 
-        //Draw ball over stage
+        //Draw over stage
         batch.begin();
-        for (Ball b: balls) {
-            b.draw(batch);
-        }
-        font.draw(batch, MainGame.getInstance().getStringScore(), 12*BLOCK_SIZE, 9*BLOCK_SIZE);
+        levelDetails.draw(batch, font);
         batch.end();
 
-        //updateBall
-        for (Ball b: balls) {
-            b.ballMoving(blockButtons);
+        levelDetails.update(blockButtons);
+        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            //TODO move between Screens
+            Gdx.app.log("TAG: " , "Pressed ");
         }
-        //Update enemy
-        enemyGenerator.createEnemy(blockButtons);
-
     }
 
     @Override
@@ -164,9 +133,9 @@ public class Play implements Screen {
 
     @Override
     public void dispose() {
-        batch.dispose();
-        background.dispose();
-        font.dispose();
+        //batch.dispose();
+       // background.dispose();
+        //font.dispose();
 
     }
 

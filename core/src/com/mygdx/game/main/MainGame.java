@@ -3,7 +3,6 @@
 package com.mygdx.game.main;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.mygdx.game.screens.MainMenu;
 

@@ -6,21 +6,17 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.mygdx.game.game.BackButton;
 
 public class AboutScreen implements Screen {
     private SpriteBatch batch;
     private Texture background;
     private Stage stage;
-    private BackButton buttonBack;
 
     @Override
     public void show() {
         batch = new SpriteBatch();
         background = new Texture("backgroundAbout.png");
-        buttonBack = new BackButton();
         stage = new Stage();
-        stage.addActor(buttonBack.getBtn());
         Gdx.input.setInputProcessor(stage);
     }
 
