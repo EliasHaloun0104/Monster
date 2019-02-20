@@ -17,7 +17,6 @@ import com.mygdx.game.game.BlockButton;
 import com.mygdx.game.game.BackButton;
 import com.mygdx.game.game.Button;
 import com.mygdx.game.game.EnemyGenerator;
-import com.mygdx.game.game.Pair;
 import com.mygdx.game.main.MainGame;
 import com.mygdx.game.main.ViewManager;
 
@@ -32,11 +31,8 @@ public class Level implements Screen {
     private Texture background;
     private BitmapFont font;
 
-
     private EnemyGenerator enemyGenerator;
     private Array<Ball> balls;
-    private Pair ballPosition;
-    private int numberOfAvailableBall;
     private boolean render;
 
     private Array<BlockButton> blockButtons;
@@ -72,18 +68,12 @@ public class Level implements Screen {
         balls.add(new Ball());
 
 
-
-        ballPosition = new Pair(14*BLOCK_SIZE, 2*BLOCK_SIZE);
-
-        enemyGenerator = new EnemyGenerator(1, 50);
+        //enemyGenerator = new EnemyGenerator(1, 50);
 
         batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.RED);
         background = new Texture("background2.png");
-        numberOfAvailableBall = 19;
-
-
 
         stage = new Stage(viewManager.getViewport());
 
@@ -126,38 +116,34 @@ public class Level implements Screen {
             b.draw(batch);
         }
 
-        font.draw(batch, String.valueOf(numberOfAvailableBall), ballPosition.getX(), ballPosition.getY());
-        font.draw(batch, enemyGenerator.getLevel(), 12*BLOCK_SIZE, 9.5f*BLOCK_SIZE);
-        font.draw(batch, MainGame.getInstance().getStringScore(), 12*BLOCK_SIZE, 9*BLOCK_SIZE);
+
+
 
         batch.end();
         stage.draw();
         stage.act();
 
-
+        //Draw ball over stage
         batch.begin();
+        for (int i = 0; i < blockButtons.size  ; i++) {
+            font.draw(batch, String.valueOf(i), blockButtons.get(i).getX(), blockButtons.get(i).getY());
+        }
         for (Ball b: balls) {
             b.draw(batch);
         }
+        font.draw(batch, MainGame.getInstance().getStringScore(), 12*BLOCK_SIZE, 9*BLOCK_SIZE);
         batch.end();
 
-        for (Ball b: balls
-        ) {
+        //updateBall
+        for (Ball b: balls) {
             b.ballMoving(blockButtons);
         }
-
-
-        if(numberOfAvailableBall == 0 && balls.size==0){
-            MainGame.getInstance().setScreen(new HighScore());
-        }
-
 
     }
 
     @Override
     public void resize(int width, int height) {
         //viewport.update(width, height, true);
-        //Gdx.app.log("TAG", "Viewport world dimensions: (" + viewport.getWorldHeight() + ", " + viewport.getWorldWidth() + ")");
     }
 
     @Override
