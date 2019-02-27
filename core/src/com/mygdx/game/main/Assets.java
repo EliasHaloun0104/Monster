@@ -4,15 +4,10 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Assets {
-    private static Assets instance = new Assets();
     private AssetManager asset;
     private TextureAtlas atlas;
 
-    public static Assets getInstance() {
-        return instance;
-    }
-
-    private Assets() {
+    public Assets() {
         asset = new AssetManager();
         asset.load("Basic.atlas", TextureAtlas.class);
         asset.finishLoading();
@@ -24,7 +19,7 @@ public class Assets {
     }
 
     public TextureAtlas.AtlasRegion ball(){
-        return Assets.getInstance().getRegion("ball",-1);
+        return atlas.findRegion("ball",-1);
     }
 
 }

@@ -3,53 +3,38 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.game.Button;
-import com.mygdx.game.main.Assets;
-import com.mygdx.game.main.LevelDetails;
 import com.mygdx.game.main.MainGame;
-import com.mygdx.game.main.ViewManager;
 
 import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 
 public class MainMenu implements Screen {
-    private ViewManager viewManager;
-
-    private SpriteBatch batch;
+    Basic screen;
 	private Texture background;
-
-
-    private Stage stage;
-    private Array<Button> buttons;
+	private Array<Button> buttons;
 
 
     @Override
     public void show() {
-        batch = new SpriteBatch();
-        viewManager = new ViewManager();
-        stage = new Stage(viewManager.getViewport());
+        screen = new Basic();
         background = new Texture("background.png");
-        buttons = new Array<Button>();
-        float xPos = (Gdx.graphics.getWidth()/4- BLOCK_SIZE*3);
+        buttons = new Array<>();
+        int xPos = BLOCK_SIZE*2;
 
-        buttons.add(new Button("levelButton", -1));
-        buttons.add(new Button("leaderButton", -1));
-        buttons.add(new Button("howTobutton", -1));
-        buttons.add(new Button("whoWeAre", -1));
-        buttons.add(new Button("exitButton", -1));
+        buttons.add(new Button("levelButton", -1, screen.assets));
+        buttons.add(new Button("leaderButton", -1, screen.assets));
+        buttons.add(new Button("howTobutton", -1, screen.assets));
+        buttons.add(new Button("whoWeAre", -1, screen.assets));
+        buttons.add(new Button("exitButton", -1, screen.assets));
 
 
         for (int i = 0; i < buttons.size ; i++) {
             final Button b = buttons.get(i);
-            b.getBtn().setPosition(xPos + i%2*BLOCK_SIZE*2, BLOCK_SIZE*(5-i));
+            b.getBtn().setPosition(xPos, BLOCK_SIZE*(4.2f-i));
             final int finalI = i;
             b.getBtn().addListener(new InputListener(){
                 @Override
@@ -79,32 +64,23 @@ public class MainMenu implements Screen {
 
 
         for (Button b: buttons) {
-            stage.addActor(b.getBtn());
+            screen.stage.addActor(b.getBtn());
         }
 
-        Gdx.input.setInputProcessor(stage);
         Gdx.input.setCatchBackKey(true);
 
     }
 
     @Override
     public void render(float delta) {
-        viewManager.apply(batch, stage);
-        Gdx.gl.glClearColor(0.90f, 0.90f, 0.90f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        screen.render();
+        screen.batch.begin();
+        screen.batch.draw(background,0,0);
+        screen.batch.end();
 
-        batch.begin();
-        batch.draw(background,0,0);
-        batch.end();
+        screen.stage.draw();
+        screen.stage.act();
 
-        stage.draw();
-        stage.act();
-
-        batch.begin();
-
-        batch.end();
-
-        update();
         if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             //TODO move between Screens
             Gdx.app.exit();
@@ -135,13 +111,9 @@ public class MainMenu implements Screen {
 
     @Override
 	public void dispose () {
-		batch.dispose();
-
+		screen.dispose();
 	}
 
-    public void update() {
-
-    }
 
 
 }

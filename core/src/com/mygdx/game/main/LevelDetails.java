@@ -1,7 +1,9 @@
 package com.mygdx.game.main;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.game.Ball;
@@ -39,7 +41,7 @@ public class LevelDetails {
         isFinished = false;
     }
 
-    public void update(Array<BlockButton> blockButtons){
+    public void update(Array<BlockButton> blockButtons, Assets assets, Sound ping, Sound bongo){
         if(!isRunning){
             now = TimeUtils.millis();
             if(now> startTime + 3000) { // 3 seconds to start
@@ -49,13 +51,13 @@ public class LevelDetails {
         }
         //updateBall
         for (Ball b: balls) {
-            b.ballMoving(blockButtons);
+            b.ballMoving(blockButtons, ping, bongo, assets);
         }
         for (int i = 0; i < balls.size ; i++) {
             if(balls.get(i).isKillBall()) balls.removeIndex(i);
         }
         //Update enemy
-        if(enemy>0) enemyGenerator.createEnemy(blockButtons);
+        if(enemy>0) enemyGenerator.createEnemy(blockButtons, assets);
     }
 
     public void generateBall(){
@@ -65,9 +67,9 @@ public class LevelDetails {
         }
     }
 
-    public void draw(SpriteBatch batch, BitmapFont font){
+    public void draw(SpriteBatch batch, BitmapFont font, TextureRegion ball){
         for (Ball b: balls) {
-            b.draw(batch);
+            b.draw(batch, ball);
         }
         font.draw(batch, "Level " +  level, 40 , BLOCK_SIZE *6 -BLOCK_SIZE/2);
         if(!isRunning)

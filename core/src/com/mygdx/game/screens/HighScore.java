@@ -6,35 +6,28 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.game.Player;
-import com.mygdx.game.main.Assets;
 import com.mygdx.game.main.MainGame;
-import com.mygdx.game.main.ViewManager;
 
 import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 
 
 public class HighScore implements Screen {
-    private ViewManager viewManager;
+    private Basic screen;
 
-    private SpriteBatch batch;
     private Texture background;
-    private Stage stage;
     private TextField textField;
     private TextField.TextFieldStyle textFieldStyle;
 
-    private BitmapFont font;
+
     private ImageButton gameButton;
 
     //TODO replace prefs by database
@@ -47,35 +40,32 @@ public class HighScore implements Screen {
 
     @Override
     public void show() {
+        screen = new Basic();
 
-        batch = new SpriteBatch();
-        viewManager = new ViewManager();
-        stage = new Stage(viewManager.getViewport());
 
         indexOfScore = -1;
 
 
         float yPos = Gdx.graphics.getHeight()/8;
         float xPos = Gdx.graphics.getWidth()/2;
-        TextureRegionDrawable image_1 = new TextureRegionDrawable(Assets.getInstance().getRegion("submitName",-1));
+        TextureRegionDrawable image_1 = new TextureRegionDrawable(screen.assets.getRegion("submitName",-1));
         gameButton = new ImageButton(image_1);
         gameButton.setPosition(xPos-BLOCK_SIZE*2, yPos);
 
         background = new Texture("background.png");
-        font = new BitmapFont();
-        font.setColor(Color.RED);
+
 
         textFieldStyle = new TextField.TextFieldStyle();
-        textFieldStyle.font = font;
+        textFieldStyle.font = screen.font;
         textFieldStyle.fontColor = Color.RED;
-        textFieldStyle.background = new TextureRegionDrawable(Assets.getInstance().getRegion("courser",-1));
+        textFieldStyle.background = new TextureRegionDrawable(screen.assets.getRegion("courser",-1));
         textField = new TextField(" ", textFieldStyle);
         textField.setWidth(gameButton.getWidth());
         textField.setHeight(gameButton.getHeight());
         textField.setAlignment(Align.center);
         textField.setPosition(gameButton.getX(),yPos+70);
-        stage.addActor(gameButton);
-        stage.addActor(textField);
+        screen.stage.addActor(gameButton);
+        screen.stage.addActor(textField);
 
 
 
@@ -92,9 +82,7 @@ public class HighScore implements Screen {
 
 
 
-        Gdx.input.setInputProcessor(stage);
-
-        players = new Array<Player>();
+        players = new Array<>();
         prefs = Gdx.app.getPreferences("HighScorePreferences");//Gets called My preferences
         if(!prefs.contains("P_1_name")){
             firstTimePreference();
@@ -112,16 +100,14 @@ public class HighScore implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.90f, 0.90f, 0.90f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        viewManager.apply(batch, stage);
+        screen.render();
 
-        batch.begin();
-        batch.draw(background,0,0);
+        screen.batch.begin();
+        screen.batch.draw(background,0,0);
         for (int i = 0; i < players.size ; i++) {
-            font.draw(batch, players.get(i).toString(), BLOCK_SIZE, BLOCK_SIZE*6 - i*BLOCK_SIZE/2);
+            screen.font.draw(screen.batch, players.get(i).toString(), BLOCK_SIZE, BLOCK_SIZE*6 - i*BLOCK_SIZE/2);
         }
-        batch.end();
+        screen.batch.end();
 
         //stage.draw();
         //stage.act();

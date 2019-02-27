@@ -10,8 +10,8 @@ public class Button {
     ImageButton btn;
     TextureRegionDrawable textureRegionDrawable;
 
-    public Button(String regionalTexture, int index) {
-        textureRegionDrawable = new TextureRegionDrawable(Assets.getInstance().getRegion(regionalTexture, index));
+    public Button(String regionalTexture, int index, Assets assets) {
+        textureRegionDrawable = new TextureRegionDrawable(assets.getRegion(regionalTexture, index));
         btn = new ImageButton(textureRegionDrawable);
 
     }
@@ -20,8 +20,8 @@ public class Button {
         return btn;
     }
 
-    public void setImage(String regionalTexture){
-        textureRegionDrawable = new TextureRegionDrawable(Assets.getInstance().getRegion(regionalTexture,-1));
+    public void setImage(String regionalTexture, Assets assets){
+        textureRegionDrawable = new TextureRegionDrawable(assets.getRegion(regionalTexture,-1));
         btn.getStyle().imageUp = textureRegionDrawable;
 
     }

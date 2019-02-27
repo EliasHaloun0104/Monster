@@ -1,6 +1,5 @@
 package com.mygdx.game.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -9,12 +8,8 @@ import com.mygdx.game.main.Assets;
 
 import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 
-
 public class Ball {
-    private static Sound ping = Gdx.audio.newSound(Gdx.files.internal("ping.wav"));
-    private static Sound bongo = Gdx.audio.newSound(Gdx.files.internal("bongo.wav"));
 
-    private static TextureRegion ball = Assets.getInstance().ball();
 
     private Pair position; // to get the real ball position
     private Direction direction;
@@ -29,7 +24,7 @@ public class Ball {
         isDying = false;
     }
 
-    public void draw(SpriteBatch batch) {
+    public void draw(SpriteBatch batch, TextureRegion ball) {
         batch.draw(ball, position.getX(), position.getY());
         /*if (timer.isStartDeath()) {
             batch.draw(dyingBall, position.getX(), position.getY());
@@ -49,7 +44,7 @@ public class Ball {
         return null;
     }
 
-    public void ballMoving(Array<BlockButton> blockButtons) {
+    public void ballMoving(Array<BlockButton> blockButtons, Sound ping, Sound bongo, Assets assets) {
         //Add the move depend on direction
         direction.move(position);
 
@@ -65,11 +60,11 @@ public class Ball {
                         switch (direction){
                             case LEFT:
                                 direction = Direction.UP;
-                                playPing();
+                                ping.play();
                                 break;
                             case DOWN:
                                 direction = Direction.RIGHT;
-                                playPing();
+                                ping.play();
                                 break;
                         }
                         break;
@@ -77,11 +72,11 @@ public class Ball {
                         switch (direction){
                             case RIGHT:
                                 direction = Direction.UP;
-                                playPing();
+                                ping.play();
                                 break;
                             case DOWN:
                                 direction = Direction.LEFT;
-                                playPing();
+                                ping.play();
                                 break;
                         }
                         break;
@@ -89,11 +84,11 @@ public class Ball {
                         switch (direction){
                             case LEFT:
                                 direction = Direction.DOWN;
-                                playPing();
+                                ping.play();
                                 break;
                             case UP:
                                 direction = Direction.RIGHT;
-                                playPing();
+                                ping.play();
                                 break;
                         }
                         break;
@@ -101,16 +96,16 @@ public class Ball {
                         switch (direction){
                             case RIGHT:
                                 direction = Direction.DOWN;
-                                playPing();
+                                ping.play();
                                 break;
                             case UP:
                                 direction = Direction.LEFT;
-                                playPing();
+                                ping.play();
                                 break;
                         }
                         break;
                     case 5: //Enemy
-                        blockButton.counterStrike();
+                        blockButton.counterStrike(assets);
                         bongo.play();
                         break;
                 }
@@ -131,7 +126,7 @@ public class Ball {
                     blockNext = findBlaock(blockButtons, positionNext);
                     if(blockNext != null && (blockNext.getRef() == 2 || blockNext.getRef() == 4)){
                        direction = Direction.RIGHT;
-                        playPing();
+                        ping.play();
                     }
                     break;
                 case RIGHT:
@@ -139,7 +134,7 @@ public class Ball {
                     blockNext = findBlaock(blockButtons, positionNext);
                     if(blockNext != null && (blockNext.getRef() == 1 || blockNext.getRef() == 3)){
                         direction = Direction.LEFT;
-                        playPing();
+                        ping.play();
                     }
                     break;
             }
@@ -152,7 +147,7 @@ public class Ball {
                     blockNext = findBlaock(blockButtons, positionNext);
                     if (blockNext != null && (blockNext.getRef() == 1 || blockNext.getRef() == 2)) {
                         direction = Direction.DOWN;
-                        playPing();
+                        ping.play();
                     }
                     break;
                 case DOWN:
@@ -160,16 +155,14 @@ public class Ball {
                     blockNext = findBlaock(blockButtons, positionNext);
                     if (blockNext != null && (blockNext.getRef() == 3 || blockNext.getRef() == 4)) {
                         direction = Direction.UP;
-                        playPing();
+                        ping.play();
                     }
                     break;
             }
         }
     }
 
-    void playPing(){
-        ping.play();
-    }
+
 
     public boolean isKillBall() {
         return killBall;
