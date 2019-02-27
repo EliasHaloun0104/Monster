@@ -28,11 +28,10 @@ public class LevelMap implements Screen {
     private Stage stage;
     @Override
     public void show() {
-        viewManager = new ViewManager(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        stage = new Stage(viewManager.getViewport());
+
         batch = new SpriteBatch();
         buttons = new Array<>();
-        viewManager = new ViewManager(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        viewManager = new ViewManager();
         stage = new Stage(viewManager.getViewport());
         for (int i = 0; i < numberOfLevel ; i++) {
             buttons.add(new Button("block",-1));
@@ -62,7 +61,7 @@ public class LevelMap implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0.90f, 0.90f, 0.90f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        viewManager.apply(batch);
+        viewManager.apply(batch, stage);
 
         batch.begin();
         batch.draw(background,0,0);

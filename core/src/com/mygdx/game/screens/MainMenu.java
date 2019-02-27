@@ -34,7 +34,7 @@ public class MainMenu implements Screen {
     @Override
     public void show() {
         batch = new SpriteBatch();
-        viewManager = new ViewManager(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        viewManager = new ViewManager();
         stage = new Stage(viewManager.getViewport());
         background = new Texture("background.png");
         buttons = new Array<Button>();
@@ -89,7 +89,7 @@ public class MainMenu implements Screen {
 
     @Override
     public void render(float delta) {
-        viewManager.apply(batch);
+        viewManager.apply(batch, stage);
         Gdx.gl.glClearColor(0.90f, 0.90f, 0.90f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

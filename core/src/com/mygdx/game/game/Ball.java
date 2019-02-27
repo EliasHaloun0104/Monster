@@ -24,7 +24,7 @@ public class Ball {
 
     //All balls born on square 13,1
     public Ball() {
-        this.position = new Pair(14*BLOCK_SIZE, BLOCK_SIZE);
+        this.position = new Pair(13*BLOCK_SIZE, BLOCK_SIZE);
         this.direction = Direction.LEFT;
         isDying = false;
     }

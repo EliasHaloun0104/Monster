@@ -57,7 +57,7 @@ public class Play implements Screen {
         font = new BitmapFont();
         font.setColor(Color.WHITE);
 
-        viewManager = new ViewManager(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        viewManager = new ViewManager();
         stage = new Stage(viewManager.getViewport());
 
         levelDetails = new LevelDetails(1,3, 2, 5000);
@@ -67,7 +67,7 @@ public class Play implements Screen {
 
 
         ballButton = new Button("block",-1);
-        ballButton.getBtn().setPosition(14*BLOCK_SIZE, BLOCK_SIZE);
+        ballButton.getBtn().setPosition(13*BLOCK_SIZE, BLOCK_SIZE);
         ballButton.getBtn().addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -81,7 +81,7 @@ public class Play implements Screen {
         BlockButton temp;
         for (int i = 0; i < MAX_COLUMN; i++) {
             for (int j = 0; j < MAX_RAW; j++) {
-                temp =  new BlockButton(0, (i+6)*BLOCK_SIZE, (j+1)*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+                temp =  new BlockButton(0, (i+5)*BLOCK_SIZE, (j+1)*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
                 blockButtons.add(temp);
                 temp.addToStage(stage);
             }
@@ -97,7 +97,7 @@ public class Play implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0.90f, 0.90f, 0.90f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        viewManager.apply(batch);
+        viewManager.apply(batch, stage);
 
         batch.begin();
         batch.draw(background,0,0);
@@ -113,7 +113,6 @@ public class Play implements Screen {
 
         levelDetails.update(blockButtons);
         if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
-            //TODO move between Screens
             MainGame.getInstance().setScreen(new LevelMap());
         }
     }
