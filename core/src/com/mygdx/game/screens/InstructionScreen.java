@@ -8,8 +8,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.main.MainGame;
+import com.mygdx.game.main.ViewManager;
 
 public class InstructionScreen implements Screen {
+    private ViewManager viewManager;
+
     private SpriteBatch batch;
     private Texture background;
     private Stage stage;
@@ -18,14 +21,16 @@ public class InstructionScreen implements Screen {
     public void show() {
         batch = new SpriteBatch();
         background = new Texture("bg_instruction.png");
-        stage = new Stage();
+        viewManager = new ViewManager(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        stage = new Stage(viewManager.getViewport());
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.8f, 0.7f, 1, 0.4f);
+        Gdx.gl.glClearColor(0.90f, 0.90f, 0.90f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        viewManager.apply(batch);
 
         batch.begin();
         batch.draw(background,0,0);
@@ -33,7 +38,7 @@ public class InstructionScreen implements Screen {
         stage.draw();
         stage.act();
 
-        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             //TODO move between Screens
             MainGame.getInstance().setScreen(new MainMenu());
         }

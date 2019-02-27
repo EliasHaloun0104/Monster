@@ -112,7 +112,7 @@ public class Play implements Screen {
         batch.end();
 
         levelDetails.update(blockButtons);
-        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             //TODO move between Screens
             MainGame.getInstance().setScreen(new LevelMap());
         }

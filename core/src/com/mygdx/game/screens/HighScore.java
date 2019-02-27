@@ -20,11 +20,14 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.game.Player;
 import com.mygdx.game.main.Assets;
 import com.mygdx.game.main.MainGame;
+import com.mygdx.game.main.ViewManager;
 
 import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 
 
 public class HighScore implements Screen {
+    private ViewManager viewManager;
+
     private SpriteBatch batch;
     private Texture background;
     private Stage stage;
@@ -46,7 +49,8 @@ public class HighScore implements Screen {
     public void show() {
 
         batch = new SpriteBatch();
-        stage = new Stage();
+        viewManager = new ViewManager(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        stage = new Stage(viewManager.getViewport());
 
         indexOfScore = -1;
 
@@ -108,8 +112,9 @@ public class HighScore implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.8f, 0.7f, 1, 0.4f);
+        Gdx.gl.glClearColor(0.90f, 0.90f, 0.90f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        viewManager.apply(batch);
 
         batch.begin();
         batch.draw(background,0,0);
@@ -118,10 +123,10 @@ public class HighScore implements Screen {
         }
         batch.end();
 
-        stage.draw();
-        stage.act();
+        //stage.draw();
+        //stage.act();
 
-        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             //TODO move between Screens
             MainGame.getInstance().setScreen(new MainMenu());
         }

@@ -10,36 +10,51 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Scaling;
 import com.mygdx.game.game.Button;
 import com.mygdx.game.main.MainGame;
+import com.mygdx.game.main.ViewManager;
 
 import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 
 public class LevelMap implements Screen {
+    private ViewManager viewManager;
+
     private SpriteBatch batch;
     private Texture background;
 
-    private final int  numberOfLevel = 12;
+    private final int  numberOfLevel = 1;
     private Array<Button> buttons;
     private Stage stage;
     @Override
     public void show() {
+        viewManager = new ViewManager(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        stage = new Stage(viewManager.getViewport());
         batch = new SpriteBatch();
         buttons = new Array<>();
-        stage = new Stage();
-        for (int i = 2; i < numberOfLevel*2+3  ; i+=2) {
-            Button temp = new Button("block",-1);
-            temp.getBtn().setPosition(i*BLOCK_SIZE, 5*BLOCK_SIZE);
-            temp.getBtn().addListener(new InputListener(){
+        viewManager = new ViewManager(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        stage = new Stage(viewManager.getViewport());
+        for (int i = 0; i < numberOfLevel ; i++) {
+            buttons.add(new Button("block",-1));
+        }
+        for (int i = 0; i < numberOfLevel ; i++) {
+            buttons.get(i).getBtn().setPosition((1 + i*3)*BLOCK_SIZE, 5*BLOCK_SIZE);
+            buttons.get(i).getBtn().setHeight(BLOCK_SIZE*2);
+            buttons.get(i).getBtn().setWidth(BLOCK_SIZE*2);
+            buttons.get(i).getBtn().getImage().setScaling(Scaling.fill);
+            buttons.get(i).getBtn().addListener(new InputListener(){
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    Gdx.app.log("EliasHaloun: ", "Level i");
                     MainGame.getInstance().setScreen(new Play());
-                    return super.touchDown(event, x, y, pointer, button);
+                    return false;
                 }
             });
-            temp.addToStage(stage);
+            stage.addActor(buttons.get(i).getBtn());
         }
         background = new Texture("background2.png");
+
+        Gdx.input.setInputProcessor(stage);
 
     }
 
@@ -47,6 +62,7 @@ public class LevelMap implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0.90f, 0.90f, 0.90f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        viewManager.apply(batch);
 
         batch.begin();
         batch.draw(background,0,0);
@@ -55,7 +71,7 @@ public class LevelMap implements Screen {
         stage.act();
         stage.draw();
 
-        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             //TODO move between Screens
             MainGame.getInstance().setScreen(new MainMenu());
         }

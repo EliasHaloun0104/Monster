@@ -40,7 +40,7 @@ public class AboutScreen implements Screen {
         batch.end();
         stage.draw();
         stage.act();
-        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             //TODO move between Screens
             MainGame.getInstance().setScreen(new MainMenu());
         }

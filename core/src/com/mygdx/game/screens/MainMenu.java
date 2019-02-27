@@ -16,10 +16,13 @@ import com.mygdx.game.game.Button;
 import com.mygdx.game.main.Assets;
 import com.mygdx.game.main.LevelDetails;
 import com.mygdx.game.main.MainGame;
+import com.mygdx.game.main.ViewManager;
 
 import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 
 public class MainMenu implements Screen {
+    private ViewManager viewManager;
+
     private SpriteBatch batch;
 	private Texture background;
 
@@ -31,9 +34,10 @@ public class MainMenu implements Screen {
     @Override
     public void show() {
         batch = new SpriteBatch();
+        viewManager = new ViewManager(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        stage = new Stage(viewManager.getViewport());
         background = new Texture("background.png");
         buttons = new Array<Button>();
-        stage = new Stage();
         float xPos = (Gdx.graphics.getWidth()/4- BLOCK_SIZE*3);
 
         buttons.add(new Button("levelButton", -1));
@@ -63,7 +67,7 @@ public class MainMenu implements Screen {
                         case 3:
                             MainGame.getInstance().setScreen(new AboutScreen());
                             break;
-                        case 5:
+                        case 4:
                             Gdx.app.exit();
                             break;
 
@@ -85,11 +89,12 @@ public class MainMenu implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.8f, 0.7f, 1, 0.4f);
+        viewManager.apply(batch);
+        Gdx.gl.glClearColor(0.90f, 0.90f, 0.90f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(background,0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.draw(background,0,0);
         batch.end();
 
         stage.draw();
@@ -100,7 +105,7 @@ public class MainMenu implements Screen {
         batch.end();
 
         update();
-        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             //TODO move between Screens
             Gdx.app.exit();
         }
