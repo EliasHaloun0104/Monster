@@ -2,6 +2,7 @@ package com.mygdx.game.screens;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -119,6 +120,11 @@ public class HighScore implements Screen {
 
         stage.draw();
         stage.act();
+
+        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            //TODO move between Screens
+            MainGame.getInstance().setScreen(new MainMenu());
+        }
 
 
 

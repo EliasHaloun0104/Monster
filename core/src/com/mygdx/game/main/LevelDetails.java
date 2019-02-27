@@ -1,4 +1,4 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.main;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -34,7 +34,6 @@ public class LevelDetails {
         balls = new Array<>();
         enemyGenerator = new EnemyGenerator(millisBetween);
 
-
         startTime = TimeUtils.millis();
         isRunning = false;
         isFinished = false;
@@ -51,6 +50,9 @@ public class LevelDetails {
         //updateBall
         for (Ball b: balls) {
             b.ballMoving(blockButtons);
+        }
+        for (int i = 0; i < balls.size ; i++) {
+            if(balls.get(i).isKillBall()) balls.removeIndex(i);
         }
         //Update enemy
         if(enemy>0) enemyGenerator.createEnemy(blockButtons);

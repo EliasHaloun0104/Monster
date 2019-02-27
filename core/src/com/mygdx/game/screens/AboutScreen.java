@@ -1,35 +1,49 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.mygdx.game.main.MainGame;
+import com.mygdx.game.main.ViewManager;
 
 public class AboutScreen implements Screen {
     private SpriteBatch batch;
     private Texture background;
+    private Texture aboutUs;
     private Stage stage;
+    private ViewManager viewManager;
 
     @Override
     public void show() {
+
         batch = new SpriteBatch();
-        background = new Texture("backgroundAbout.png");
+        background = new Texture("background.png");
+        aboutUs = new Texture("backgroundAbout.png");
         stage = new Stage();
+        viewManager = new ViewManager(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.8f, 0.7f, 1, 0.4f);
+        Gdx.gl.glClearColor(0.90f, 0.90f, 0.90f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        viewManager.apply(batch);
 
         batch.begin();
-        batch.draw(background,0,0);
+        //batch.draw(background,0,0);
+        batch.draw(aboutUs,10,10);
         batch.end();
         stage.draw();
         stage.act();
+        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            //TODO move between Screens
+            MainGame.getInstance().setScreen(new MainMenu());
+        }
 
     }
 

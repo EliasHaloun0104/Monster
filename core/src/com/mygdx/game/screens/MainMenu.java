@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.game.Button;
 import com.mygdx.game.main.Assets;
+import com.mygdx.game.main.LevelDetails;
 import com.mygdx.game.main.MainGame;
 
 import static com.mygdx.game.main.Constant.BLOCK_SIZE;
@@ -26,23 +27,19 @@ public class MainMenu implements Screen {
     private Stage stage;
     private Array<Button> buttons;
 
-    private int courser;
-    private Sprite courserImage;
-
 
     @Override
     public void show() {
         batch = new SpriteBatch();
         background = new Texture("background.png");
         buttons = new Array<Button>();
-        courser = 0;
         stage = new Stage();
         float xPos = (Gdx.graphics.getWidth()/4- BLOCK_SIZE*3);
 
-        buttons.add(new Button("startButton", -1));
-        buttons.add(new Button("loadButton", -1));
-        buttons.add(new Button("aboutButton", -1));
-        buttons.add(new Button("highScoreButton", -1));
+        buttons.add(new Button("levelButton", -1));
+        buttons.add(new Button("leaderButton", -1));
+        buttons.add(new Button("howTobutton", -1));
+        buttons.add(new Button("whoWeAre", -1));
         buttons.add(new Button("exitButton", -1));
 
 
@@ -52,27 +49,21 @@ public class MainMenu implements Screen {
             final int finalI = i;
             b.getBtn().addListener(new InputListener(){
                 @Override
-                public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                    courserImage.setPosition(b.getBtn().getX(), b.getBtn().getY());
-                    super.enter(event, x, y, pointer, fromActor);
-                }
-
-                @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     switch (finalI){
                         case 0:
-                            MainGame.getInstance().setScreen(new Play());
+                            MainGame.getInstance().setScreen(new LevelMap());
                             break;
                         case 1:
-                            MainGame.getInstance().setScreen(new InstructionScreen());
-                            break;
-                        case 2:
-                            MainGame.getInstance().setScreen(new AboutScreen());
-                            break;
-                        case 3:
                             MainGame.getInstance().setScreen(new HighScore());
                             break;
-                        case 4:
+                        case 2:
+                            MainGame.getInstance().setScreen(new InstructionScreen());
+                            break;
+                        case 3:
+                            MainGame.getInstance().setScreen(new AboutScreen());
+                            break;
+                        case 5:
                             Gdx.app.exit();
                             break;
 
@@ -83,16 +74,13 @@ public class MainMenu implements Screen {
         }
 
 
-        courserImage = new Sprite(Assets.getInstance().getRegion("courser", -1));
-        courserImage.setPosition(xPos, BLOCK_SIZE*5);
-
-
-
         for (Button b: buttons) {
             stage.addActor(b.getBtn());
         }
 
         Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCatchBackKey(true);
+
     }
 
     @Override
@@ -109,10 +97,13 @@ public class MainMenu implements Screen {
 
         batch.begin();
 
-        courserImage.draw(batch);
         batch.end();
 
         update();
+        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            //TODO move between Screens
+            Gdx.app.exit();
+        }
 
 
     }
@@ -144,23 +135,7 @@ public class MainMenu implements Screen {
 	}
 
     public void update() {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-            courser--;
-            if(courser<0){
-                courser = 4;
-            }
-            courserImage.setPosition(buttons.get(courser).getBtn().getX(),buttons.get(courser).getBtn().getY());
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
-            courser++;
-            if(courser>4){
-                courser = 0;
-            }
-            courserImage.setPosition(buttons.get(courser).getBtn().getX(),buttons.get(courser).getBtn().getY());
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
 
-        }
     }
 
 

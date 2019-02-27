@@ -23,9 +23,6 @@ public class Assets {
         return atlas.findRegion(name,index);
     }
 
-    public TextureAtlas.AtlasRegion ball_die(){
-        return Assets.getInstance().getRegion("ballDie",-1);
-    }
     public TextureAtlas.AtlasRegion ball(){
         return Assets.getInstance().getRegion("ball",-1);
     }

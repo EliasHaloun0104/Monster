@@ -15,6 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.game.BlockButton;
 import com.mygdx.game.game.Button;
+import com.mygdx.game.main.LevelDetails;
+import com.mygdx.game.main.MainGame;
 import com.mygdx.game.main.ViewManager;
 
 import static com.mygdx.game.main.Constant.BLOCK_SIZE;
@@ -37,6 +39,12 @@ public class Play implements Screen {
 
 
     private LevelDetails levelDetails;
+
+    //public Play(LevelDetails levelDetails) {
+        //this.levelDetails = levelDetails;
+    //}
+
+
 
 
     //Buttons
@@ -83,7 +91,6 @@ public class Play implements Screen {
         InputMultiplexer multiplexer = new InputMultiplexer();
         Gdx.input.setInputProcessor(multiplexer);
         multiplexer.addProcessor(stage);
-        Gdx.input.setCatchBackKey(true);
     }
 
     @Override
@@ -107,7 +114,7 @@ public class Play implements Screen {
         levelDetails.update(blockButtons);
         if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
             //TODO move between Screens
-            Gdx.app.log("TAG: " , "Pressed ");
+            MainGame.getInstance().setScreen(new LevelMap());
         }
     }
 

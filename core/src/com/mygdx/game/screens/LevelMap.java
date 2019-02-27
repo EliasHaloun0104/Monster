@@ -6,37 +6,61 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.game.Button;
 import com.mygdx.game.main.MainGame;
 
-public class InstructionScreen implements Screen {
+import static com.mygdx.game.main.Constant.BLOCK_SIZE;
+
+public class LevelMap implements Screen {
     private SpriteBatch batch;
     private Texture background;
-    private Stage stage;
 
+    private final int  numberOfLevel = 12;
+    private Array<Button> buttons;
+    private Stage stage;
     @Override
     public void show() {
         batch = new SpriteBatch();
-        background = new Texture("bg_instruction.png");
+        buttons = new Array<>();
         stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
+        for (int i = 2; i < numberOfLevel*2+3  ; i+=2) {
+            Button temp = new Button("block",-1);
+            temp.getBtn().setPosition(i*BLOCK_SIZE, 5*BLOCK_SIZE);
+            temp.getBtn().addListener(new InputListener(){
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    MainGame.getInstance().setScreen(new Play());
+                    return super.touchDown(event, x, y, pointer, button);
+                }
+            });
+            temp.addToStage(stage);
+        }
+        background = new Texture("background2.png");
+
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.8f, 0.7f, 1, 0.4f);
+        Gdx.gl.glClearColor(0.90f, 0.90f, 0.90f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
         batch.draw(background,0,0);
         batch.end();
-        stage.draw();
+
         stage.act();
+        stage.draw();
 
         if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
             //TODO move between Screens
             MainGame.getInstance().setScreen(new MainMenu());
         }
+
+
     }
 
     @Override

@@ -1,153 +1,104 @@
 
 Basic.png
-size: 1024,256
+size: 2048,128
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 B_downLeft
   rotate: false
-  xy: 650, 2
+  xy: 1654, 36
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 B_downRight
   rotate: false
-  xy: 650, 68
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-B_empty
-  rotate: false
-  xy: 842, 134
+  xy: 1588, 36
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 B_upLeft
   rotate: false
-  xy: 584, 68
+  xy: 1522, 36
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 B_upRight
   rotate: false
-  xy: 776, 134
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-PlayButton
-  rotate: false
-  xy: 584, 2
+  xy: 1390, 36
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 aboutButton
   rotate: false
-  xy: 2, 68
+  xy: 2, 36
   size: 256, 64
   orig: 256, 64
   offset: 0, 0
   index: -1
-backButton
-  rotate: false
-  xy: 716, 2
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-backButtonCourser
-  rotate: false
-  xy: 782, 2
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
 ball
   rotate: false
-  xy: 848, 68
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-ballDie
-  rotate: false
-  xy: 518, 68
+  xy: 1786, 36
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 block
   rotate: false
-  xy: 518, 2
+  xy: 1456, 36
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 blockEnemy
   rotate: false
-  xy: 782, 68
+  xy: 1720, 36
   size: 64, 64
   orig: 64, 64
-  offset: 0, 0
-  index: -1
-blockHover
-  rotate: false
-  xy: 716, 68
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-courser
-  rotate: false
-  xy: 518, 134
-  size: 256, 64
-  orig: 256, 64
   offset: 0, 0
   index: -1
 exitButton
   rotate: false
+  xy: 1164, 36
+  size: 224, 64
+  orig: 224, 64
+  offset: 0, 0
+  index: -1
+howTobutton
+  rotate: false
+  xy: 486, 36
+  size: 224, 64
+  orig: 224, 64
+  offset: 0, 0
+  index: -1
+leaderButton
+  rotate: false
+  xy: 938, 36
+  size: 224, 64
+  orig: 224, 64
+  offset: 0, 0
+  index: -1
+levelButton
+  rotate: false
+  xy: 712, 36
+  size: 224, 64
+  orig: 224, 64
+  offset: 0, 0
+  index: -1
+submitButton
+  rotate: false
   xy: 2, 2
-  size: 256, 64
-  orig: 256, 64
+  size: 112, 32
+  orig: 112, 32
   offset: 0, 0
   index: -1
-highScoreButton
+whoWeAre
   rotate: false
-  xy: 260, 134
-  size: 256, 64
-  orig: 256, 64
-  offset: 0, 0
-  index: -1
-loadButton
-  rotate: false
-  xy: 260, 2
-  size: 256, 64
-  orig: 256, 64
-  offset: 0, 0
-  index: -1
-restartButton
-  rotate: false
-  xy: 908, 134
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-startButton
-  rotate: false
-  xy: 260, 68
-  size: 256, 64
-  orig: 256, 64
-  offset: 0, 0
-  index: -1
-submitName
-  rotate: false
-  xy: 2, 134
-  size: 256, 64
-  orig: 256, 64
+  xy: 260, 36
+  size: 224, 64
+  orig: 224, 64
   offset: 0, 0
   index: -1

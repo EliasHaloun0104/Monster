@@ -26,37 +26,15 @@ public class ViewManager {
 
     }
 
-    public void draw(SpriteBatch batch){
-    }
-
-    public Matrix4 getMatrix(){
-        return camera.combined;
-    }
-
-
     public void apply(SpriteBatch batch){
         viewport.apply();
         batch.setProjectionMatrix(camera.combined);
     }
 
-    public void resize(int x, int y){
-        viewport.update(x,y, true);
-    }
 
     public Viewport getViewport() {
         return viewport;
     }
 
-    public void updateCamera(int moveX, int moveY){
-        camera.position.set(camera.position.x+moveX,camera.position.y+moveY,0);
 
-    }
-
-    public void zoom(float a){
-        if(camera.zoom>=1)
-            camera.zoom +=a;
-        if(camera.zoom <1){
-            camera.zoom=1;
-        }
-    }
 }
