@@ -83,8 +83,12 @@ task run(type: Exec) {
 
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-}
 
+
+}
+dependencies{
+    implementation 'com.facebook.android:facebook-login:[4,5)'
+}
 // sets up the Android Eclipse project, using the old Ant based build.
 eclipse {
     // need to specify Java source sets explicitly, SpringSource Gradle Eclipse plugin
