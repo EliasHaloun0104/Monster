@@ -55,7 +55,7 @@ public class LoginActivity extends Activity {
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-            //System.out.println("passed");
+            System.out.println("passed");
                 staus.setText("Good\n"+loginResult.getAccessToken());
             }
 
