@@ -10,6 +10,9 @@ import android.widget.Button;
 public class AndroidLauncher extends Activity {
 
     private Button playButton;
+    private Button chatButton;
+    private Button howToPlayButton;
+    private Button aboutUsButton;
     private Button secondActivityButton;
 
     @Override
@@ -26,6 +29,9 @@ public class AndroidLauncher extends Activity {
 
             playButton = findViewById(R.id.startGame);
             secondActivityButton = findViewById(R.id.secondButton);
+            chatButton = findViewById(R.id.chat);
+            howToPlayButton = findViewById(R.id.howToPlay);
+            aboutUsButton = findViewById(R.id.aboutUs);
 
             playButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -41,6 +47,25 @@ public class AndroidLauncher extends Activity {
                     startActivity(intent);
                 }
             });
+            chatButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), ChatActivity.class);
+                    startActivity(intent);
+                }
+            });
+            aboutUsButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), AboutUs.class);
+                    startActivity(intent);
+                }
+            });
+            howToPlayButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), HowToPlay.class);
+                    startActivity(intent);
+                }
+            });
+
         }
 
         else {
