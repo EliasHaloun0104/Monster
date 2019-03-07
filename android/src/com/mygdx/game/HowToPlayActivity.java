@@ -3,7 +3,7 @@ package com.mygdx.game;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class HowToPlay extends Activity {
+public class HowToPlayActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 

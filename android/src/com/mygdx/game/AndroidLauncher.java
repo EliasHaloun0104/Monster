@@ -14,6 +14,7 @@ public class AndroidLauncher extends Activity {
     private Button howToPlayButton;
     private Button aboutUsButton;
     private Button secondActivityButton;
+    private Button admintButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,8 @@ public class AndroidLauncher extends Activity {
             chatButton = findViewById(R.id.chat);
             howToPlayButton = findViewById(R.id.howToPlay);
             aboutUsButton = findViewById(R.id.aboutUs);
+
+            admintButton = findViewById(R.id.adminButton);
 
             playButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -55,13 +58,20 @@ public class AndroidLauncher extends Activity {
             });
             aboutUsButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), AboutUs.class);
+                    Intent intent = new Intent(v.getContext(), AboutUsActivity.class);
                     startActivity(intent);
                 }
             });
             howToPlayButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), HowToPlay.class);
+                    Intent intent = new Intent(v.getContext(), HowToPlayActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            admintButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), AdminActivity.class);
                     startActivity(intent);
                 }
             });
