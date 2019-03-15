@@ -23,7 +23,6 @@ import static com.mygdx.game.main.Constant.MAX_RAW;
 public class Play implements Screen {
     Basic screen;
 
-
     private Texture background;
     private LevelDetails levelDetails;
 
@@ -31,16 +30,14 @@ public class Play implements Screen {
     private Sound bongo;
     private TextureRegion ball;
 
-
-
-
+    private float timeSec;
     //Buttons
     private Array<BlockButton> blockButtons;
     private Button ballButton;
 
     @Override
     public void show() {
-
+        timeSec = 0;
         screen = new Basic();
         ping =  Gdx.audio.newSound(Gdx.files.internal("ping.wav"));
         bongo = Gdx.audio.newSound(Gdx.files.internal("bongo.wav"));
@@ -82,6 +79,7 @@ public class Play implements Screen {
 
     @Override
     public void render(float delta) {
+        timeSec += delta;
         screen.render();
 
         screen.batch.begin();
@@ -94,9 +92,12 @@ public class Play implements Screen {
         //Draw over stage
         screen.batch.begin();
         levelDetails.draw(screen.batch, screen.font, ball);
+
+
         screen.batch.end();
 
-        levelDetails.update(blockButtons, screen.assets, ping, bongo);
+        levelDetails.update(blockButtons, screen.assets, ping, bongo, timeSec);
+        if(timeSec>1f) timeSec -=1f;
         if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             MainGame.getInstance().setScreen(new LevelMap());
         }

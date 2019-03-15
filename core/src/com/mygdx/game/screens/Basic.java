@@ -22,8 +22,9 @@ public class Basic {
         stage = new Stage(viewManager.getViewport());
 
         assets = new Assets();
-        font = new BitmapFont();
-        font.setColor(Color.WHITE);
+        font = new BitmapFont(Gdx.files.internal("baseFont.fnt"),false);
+
+        font.setColor(Color.GREEN);
 
         Gdx.input.setInputProcessor(stage);
     }

@@ -35,7 +35,6 @@ public class LevelMap implements Screen {
             buttons.get(i).getBtn().addListener(new InputListener(){
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    Gdx.app.log("EliasHaloun: ", "Level i");
                     MainGame.getInstance().setScreen(new Play());
                     return false;
                 }
@@ -48,6 +47,7 @@ public class LevelMap implements Screen {
     @Override
     public void render(float delta) {
         screen.render();
+
         screen.batch.begin();
         screen.batch.draw(background,0,0);
         screen.batch.end();

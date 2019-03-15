@@ -365,9 +365,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.27997087"
-     inkscape:cx="-1395.7362"
-     inkscape:cy="1505.1002"
+     inkscape:zoom="0.60376194"
+     inkscape:cx="-947.91427"
+     inkscape:cy="-685.36247"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -2358,14 +2358,14 @@
       <image
          sodipodi:absref="C:\Users\ELHA0104\LibGdx\test\android\assets\Images\logo.sv.png"
          xlink:href="logo.sv.png"
-         inkscape:export-ydpi="96"
-         inkscape:export-xdpi="96"
-         width="31.730015"
-         height="11.402974"
-         preserveAspectRatio="none"
-         id="image2345"
+         y="172.4377"
          x="-348.16895"
-         y="172.4377" />
+         id="image2345"
+         preserveAspectRatio="none"
+         height="11.402974"
+         width="31.730015"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96" />
       <text
          xml:space="preserve"
          style="font-style:italic;font-variant:normal;font-weight:400;font-size:3.88606763px;line-height:114.67659473%;font-family:'Times New Roman';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#4a575d;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -2922,172 +2922,25 @@
            id="tspan2298"
            sodipodi:role="line">Monsters </tspan></text>
     </g>
-    <g
+    <circle
+       r="10.078226"
+       cy="411.57678"
+       cx="-332.81555"
+       id="circle2304"
+       style="opacity:1;fill:#cd5b5b;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.65390491;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:9.05315113;stroke-opacity:1" />
+    <text
        inkscape:export-ydpi="96"
        inkscape:export-xdpi="96"
-       transform="matrix(0.62191552,0,0,0.62191552,-278.77962,273.54504)"
-       id="g2310"
-       inkscape:export-filename="C:\Users\ELHA0104\LibGdx\test\android\assets\background2.png">
-      <circle
-         style="opacity:1;fill:#cd5b5b;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.0514369;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:9.05315113;stroke-opacity:1"
-         id="circle2304"
-         cx="-86.886269"
-         cy="221.94612"
-         r="16.205137" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.51088905px;line-height:1.25;font-family:Webdings;-inkscape-font-specification:Webdings;letter-spacing:0px;word-spacing:0px;fill:#9bdfc1;fill-opacity:1;stroke:none;stroke-width:0.58777219"
-         x="-97.638641"
-         y="228.94814"
-         id="text2308"
-         inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96"><tspan
-           sodipodi:role="line"
-           id="tspan2306"
-           x="-97.638641"
-           y="228.94814"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.39999962px;font-family:Perpetua;-inkscape-font-specification:'Perpetua Bold';fill:#9bdfc1;fill-opacity:1;stroke-width:0.58777219">Monsters </tspan></text>
-    </g>
-    <g
-       style="fill:#9bdfc1;fill-opacity:1"
-       inkscape:export-ydpi="96"
-       inkscape:export-xdpi="96"
-       inkscape:export-filename="C:\Users\ELHA0104\LibGdx\test\android\assets\background2.png"
-       transform="translate(-564.14696,137.22518)"
-       id="g2318">
-      <rect
-         inkscape:export-ydpi="96"
-         inkscape:export-xdpi="96"
-         ry="3.67943"
-         rx="2.6742721"
-         style="opacity:1;fill:#9bdfc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.68887091;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:9.05315113;stroke-opacity:1"
-         id="rect2312"
-         width="66.675003"
-         height="15.875"
-         x="224.79791"
-         y="365.51065" />
-      <rect
-         y="364.98148"
-         x="215.85231"
-         height="16.933332"
-         width="76.199982"
-         id="rect2314"
-         style="opacity:1;fill:#9bdfc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.10619582;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:7.55905533;stroke-opacity:1" />
-      <rect
-         y="364.98148"
-         x="215.85229"
-         height="16.933332"
-         width="76.199982"
-         id="rect2316"
-         style="opacity:1;fill:#9bdfc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.82074279;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:9.05315113;stroke-opacity:0.94416241"
-         inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96" />
-    </g>
-    <g
-       style="fill:#9bdfc1;fill-opacity:1"
-       inkscape:export-ydpi="96"
-       inkscape:export-xdpi="96"
-       inkscape:export-filename="C:\Users\ELHA0104\LibGdx\test\android\assets\background2.png"
-       id="g2326"
-       transform="translate(-564.14696,111.8252)">
-      <rect
-         y="365.51065"
-         x="224.79791"
-         height="15.875"
-         width="66.675003"
-         id="rect2320"
-         style="opacity:1;fill:#9bdfc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.68887091;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:9.05315113;stroke-opacity:1"
-         rx="2.6742721"
-         ry="3.67943"
-         inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96" />
-      <rect
-         style="opacity:1;fill:#9bdfc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.10619582;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:7.55905533;stroke-opacity:1"
-         id="rect2322"
-         width="76.199982"
-         height="16.933332"
-         x="215.85231"
-         y="364.98148" />
-      <rect
-         inkscape:export-ydpi="96"
-         inkscape:export-xdpi="96"
-         style="opacity:1;fill:#9bdfc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.82074279;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:9.05315113;stroke-opacity:0.94416241"
-         id="rect2324"
-         width="76.199982"
-         height="16.933332"
-         x="215.85229"
-         y="364.98148" />
-    </g>
-    <g
-       style="fill:#9bdfc1;fill-opacity:1"
-       inkscape:export-ydpi="96"
-       inkscape:export-xdpi="96"
-       inkscape:export-filename="C:\Users\ELHA0104\LibGdx\test\android\assets\background2.png"
-       id="g2334"
-       transform="translate(-564.14696,86.425225)">
-      <rect
-         y="365.51065"
-         x="224.79791"
-         height="15.875"
-         width="66.675003"
-         id="rect2328"
-         style="opacity:1;fill:#9bdfc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.68887091;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:9.05315113;stroke-opacity:1"
-         rx="2.6742721"
-         ry="3.67943"
-         inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96" />
-      <rect
-         style="opacity:1;fill:#9bdfc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.10619582;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:7.55905533;stroke-opacity:1"
-         id="rect2330"
-         width="76.199982"
-         height="16.933332"
-         x="215.85231"
-         y="364.98148" />
-      <rect
-         inkscape:export-ydpi="96"
-         inkscape:export-xdpi="96"
-         style="opacity:1;fill:#9bdfc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.82074279;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:9.05315113;stroke-opacity:0.94416241"
-         id="rect2332"
-         width="76.199982"
-         height="16.933332"
-         x="215.85229"
-         y="364.98148" />
-    </g>
-    <g
-       style="fill:#9bdfc1;fill-opacity:1"
-       inkscape:export-ydpi="96"
-       inkscape:export-xdpi="96"
-       inkscape:export-filename="C:\Users\ELHA0104\LibGdx\test\android\assets\background2.png"
-       transform="translate(-564.14696,61.025248)"
-       id="g2342">
-      <rect
-         inkscape:export-ydpi="96"
-         inkscape:export-xdpi="96"
-         ry="3.67943"
-         rx="2.6742721"
-         style="opacity:1;fill:#9bdfc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.68887091;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:9.05315113;stroke-opacity:1"
-         id="rect2336"
-         width="66.675003"
-         height="15.875"
-         x="224.79791"
-         y="365.51065" />
-      <rect
-         y="364.98148"
-         x="215.85231"
-         height="16.933332"
-         width="76.199982"
-         id="rect2338"
-         style="opacity:1;fill:#9bdfc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.10619582;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:7.55905533;stroke-opacity:1" />
-      <rect
-         y="364.98148"
-         x="215.85229"
-         height="16.933332"
-         width="76.199982"
-         id="rect2340"
-         style="opacity:1;fill:#9bdfc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.82074279;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:9.05315113;stroke-opacity:0.94416241"
-         inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96" />
-    </g>
+       id="text2308"
+       y="415.93143"
+       x="-339.50259"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.62178707px;line-height:1.25;font-family:Webdings;-inkscape-font-specification:Webdings;letter-spacing:0px;word-spacing:0px;fill:#9bdfc1;fill-opacity:1;stroke:none;stroke-width:0.36554465"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15.79665375px;font-family:Perpetua;-inkscape-font-specification:'Perpetua Bold';fill:#9bdfc1;fill-opacity:1;stroke-width:0.36554465"
+         y="415.93143"
+         x="-339.50259"
+         id="tspan2306"
+         sodipodi:role="line">Monsters </tspan></text>
     <rect
        transform="scale(-1,1)"
        inkscape:export-ydpi="96.000183"

@@ -21,14 +21,11 @@ public class LevelDetails {
     private EnemyGenerator enemyGenerator;
     private Array<Ball> balls;
 
-
-    private long startTime;
-    private long now;
-    private long time;
+    private int timer;
     private boolean isRunning;
-    private boolean isFinished;
 
     public LevelDetails(int level, int enemy, int ballsNo, int millisBetween) {
+        timer = 3; // 3seconds
         this.level = level;
         this.enemy = enemy;
         this.ballsNo = ballsNo;
@@ -36,17 +33,20 @@ public class LevelDetails {
         balls = new Array<>();
         enemyGenerator = new EnemyGenerator(millisBetween);
 
-        startTime = TimeUtils.millis();
         isRunning = false;
-        isFinished = false;
     }
 
-    public void update(Array<BlockButton> blockButtons, Assets assets, Sound ping, Sound bongo){
+    public void update(Array<BlockButton> blockButtons, Assets assets, Sound ping, Sound bongo, float timer){
         if(!isRunning){
-            now = TimeUtils.millis();
-            if(now> startTime + 3000) { // 3 seconds to start
-                isRunning = true;
-                startTime = now;
+            if(timer>1f){
+                this.timer--;
+                if(this.timer == 0){
+                    isRunning = true;
+                }
+            }
+        }else{
+            if(timer>1f){
+                this.timer++;
             }
         }
         //updateBall
@@ -72,12 +72,17 @@ public class LevelDetails {
             b.draw(batch, ball);
         }
         font.draw(batch, "Level " +  level, 40 , BLOCK_SIZE *6 -BLOCK_SIZE/2);
+
+
+
         if(!isRunning)
-            font.draw(batch,"Start in: " + (TimeUtils.millis() - startTime), 40, BLOCK_SIZE*4.5f -BLOCK_SIZE/2);
+            font.draw(batch,"Start in: 0" + timer, 40, BLOCK_SIZE*4.5f -BLOCK_SIZE/2);
         else{
-            font.draw(batch,"Time: " + ((TimeUtils.millis() - startTime)), 40, BLOCK_SIZE*4.5f - BLOCK_SIZE/2);
+            font.draw(batch,"Time: " + timer, 40, BLOCK_SIZE*4.5f - BLOCK_SIZE/2);
         }
+
         font.draw(batch, "Ball/s " + ballsNo, 40 , BLOCK_SIZE *3 - BLOCK_SIZE/2);
+
         font.draw(batch, "Enemy/s " +  enemy, 40 , BLOCK_SIZE *1.5f - BLOCK_SIZE/2);
 
 
