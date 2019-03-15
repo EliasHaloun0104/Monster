@@ -4,7 +4,7 @@ package com.mygdx.game.main;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import com.mygdx.game.screens.MainMenu;
+import com.mygdx.game.screens.LevelMap;
 
 public class MainGame extends Game {
     private static MainGame ourInstance = new MainGame();
@@ -14,7 +14,7 @@ public class MainGame extends Game {
         game = new Game() {
             @Override
             public void create() {
-                game.setScreen(new MainMenu());
+                game.setScreen(new LevelMap());
             }
         };
         score = 0;

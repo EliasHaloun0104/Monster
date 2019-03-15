@@ -57,7 +57,7 @@ public class LevelMap implements Screen {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             //TODO move between Screens
-            MainGame.getInstance().setScreen(new MainMenu());
+            MainGame.getInstance().setScreen(new LevelMap());
         }
 
 
