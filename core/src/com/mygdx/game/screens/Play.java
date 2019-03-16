@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.game.BlockButton;
 import com.mygdx.game.game.Button;
+import com.mygdx.game.game.ExtendedSound;
 import com.mygdx.game.main.LevelDetails;
 import com.mygdx.game.main.MainGame;
 
@@ -26,29 +26,22 @@ public class Play implements Screen {
     private Texture background;
     private LevelDetails levelDetails;
 
-    private Sound ping;
-    private Sound bongo;
-    private TextureRegion ball;
 
     private float timeSec;
     //Buttons
     private Array<BlockButton> blockButtons;
     private Button ballButton;
 
+    public Play(int level, int enemy, int balls, int secondsBetween ) {
+        screen = new Basic();
+        levelDetails = new LevelDetails(level,enemy, balls, secondsBetween,screen);
+    }
+
     @Override
     public void show() {
         timeSec = 0;
-        screen = new Basic();
-        ping =  Gdx.audio.newSound(Gdx.files.internal("ping.wav"));
-        bongo = Gdx.audio.newSound(Gdx.files.internal("bongo.wav"));
-        ball = screen.assets.ball();
-
-
-        levelDetails = new LevelDetails(1,3, 2, 5000);
-
 
         background = new Texture("background2.png");
-
 
         ballButton = new Button("block",-1, screen.assets);
         ballButton.getBtn().setPosition(13*BLOCK_SIZE, BLOCK_SIZE);
@@ -91,12 +84,14 @@ public class Play implements Screen {
 
         //Draw over stage
         screen.batch.begin();
-        levelDetails.draw(screen.batch, screen.font, ball);
+        levelDetails.draw(screen.batch, screen.font);
 
 
         screen.batch.end();
 
-        levelDetails.update(blockButtons, screen.assets, ping, bongo, timeSec);
+        levelDetails.update(blockButtons, screen.assets, timeSec);
+
+
         if(timeSec>1f) timeSec -=1f;
         if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             MainGame.getInstance().setScreen(new LevelMap());

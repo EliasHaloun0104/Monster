@@ -25,7 +25,7 @@ public class Basic {
         font = new BitmapFont(Gdx.files.internal("baseFont.fnt"),false);
 
         font.setColor(Color.GREEN);
-
+        Gdx.input.setCatchBackKey(true);
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -35,6 +35,10 @@ public class Basic {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         viewManager.apply(batch, stage);
 
+    }
+
+    public Assets getAssets() {
+        return assets;
     }
 
     public void dispose(){

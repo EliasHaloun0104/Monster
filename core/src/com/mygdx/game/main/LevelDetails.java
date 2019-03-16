@@ -1,42 +1,53 @@
 package com.mygdx.game.main;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.utils.StringBuilder;
 import com.mygdx.game.game.Ball;
 import com.mygdx.game.game.BlockButton;
 import com.mygdx.game.game.EnemyGenerator;
+import com.mygdx.game.game.ExtendedSound;
+import com.mygdx.game.screens.Basic;
+import com.mygdx.game.screens.EndGame;
 
 import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 
 public class LevelDetails {
+    private ExtendedSound metal;
+    private ExtendedSound hitMonster;
+    private ExtendedSound lostBall;
+
     private int level;
-    private int enemy;
     private int ballsNo;
+    private TextureRegion ball;
 
-
+    private StringBuilder stringBuilder;
     private EnemyGenerator enemyGenerator;
     private Array<Ball> balls;
 
     private int timer;
     private boolean isRunning;
 
-    public LevelDetails(int level, int enemy, int ballsNo, int millisBetween) {
+    public LevelDetails(int level, int numberOfEnemy, int ballsNo, int secondsBetween, Basic screen) {
+        metal =  new ExtendedSound("ping.wav");
+        hitMonster = new ExtendedSound("bongo.wav");
+        lostBall = new ExtendedSound("loose.wav");
+
         timer = 3; // 3seconds
         this.level = level;
-        this.enemy = enemy;
         this.ballsNo = ballsNo;
+        ball = screen.getAssets().ball();
 
         balls = new Array<>();
-        enemyGenerator = new EnemyGenerator(millisBetween);
-
+        enemyGenerator = new EnemyGenerator(secondsBetween, numberOfEnemy);
         isRunning = false;
+        stringBuilder = new StringBuilder();
+
     }
 
-    public void update(Array<BlockButton> blockButtons, Assets assets, Sound ping, Sound bongo, float timer){
+    public void update(Array<BlockButton> blockButtons, Assets assets, float timer){
         if(!isRunning){
             if(timer>1f){
                 this.timer--;
@@ -51,13 +62,19 @@ public class LevelDetails {
         }
         //updateBall
         for (Ball b: balls) {
-            b.ballMoving(blockButtons, ping, bongo, assets);
+            b.ballMoving(blockButtons, metal, hitMonster, lostBall, assets);
         }
         for (int i = 0; i < balls.size ; i++) {
             if(balls.get(i).isKillBall()) balls.removeIndex(i);
         }
         //Update enemy
-        if(enemy>0) enemyGenerator.createEnemy(blockButtons, assets);
+        enemyGenerator.update(blockButtons, assets, this.timer);
+
+        if(ballsNo == 0 && balls.size == 0){
+            MainGame.getInstance().setScreen(new EndGame(this.timer, false));
+        }else if(enemyGenerator.getEnemyFixed()- hitMonster.getCounter() == 0) {
+            MainGame.getInstance().setScreen(new EndGame(this.timer, true));
+        }
     }
 
     public void generateBall(){
@@ -67,25 +84,24 @@ public class LevelDetails {
         }
     }
 
-    public void draw(SpriteBatch batch, BitmapFont font, TextureRegion ball){
+    public void draw(SpriteBatch batch, BitmapFont font){
         for (Ball b: balls) {
             b.draw(batch, ball);
         }
-        font.draw(batch, "Level " +  level, 40 , BLOCK_SIZE *6 -BLOCK_SIZE/2);
-
-
-
-        if(!isRunning)
-            font.draw(batch,"Start in: 0" + timer, 40, BLOCK_SIZE*4.5f -BLOCK_SIZE/2);
-        else{
-            font.draw(batch,"Time: " + timer, 40, BLOCK_SIZE*4.5f - BLOCK_SIZE/2);
+        stringBuilder = new StringBuilder();
+        stringBuilder.append("Level " + level + "\n");
+        if(!isRunning){
+            stringBuilder.append("Start in: " + timer + "\n");
+        }else{
+            stringBuilder.append("Timer   : " + timer + "\n");
         }
-
-        font.draw(batch, "Ball/s " + ballsNo, 40 , BLOCK_SIZE *3 - BLOCK_SIZE/2);
-
-        font.draw(batch, "Enemy/s " +  enemy, 40 , BLOCK_SIZE *1.5f - BLOCK_SIZE/2);
-
-
+        stringBuilder.append("Ball: " + ballsNo + "\n");
+        stringBuilder.append("Enemy: " + (enemyGenerator.getEnemyFixed()-hitMonster.getCounter())+ "\n");
+        font.draw(batch, stringBuilder, 40 , BLOCK_SIZE *6 -BLOCK_SIZE/2);
+        //TODO draw ball on the base
+        if(ballsNo>0){
+            batch.draw(ball, 13*BLOCK_SIZE, BLOCK_SIZE);
+        }
     }
 
 

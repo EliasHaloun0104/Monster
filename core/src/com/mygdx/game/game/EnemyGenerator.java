@@ -6,26 +6,32 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.main.Assets;
 
 public class EnemyGenerator {
-    private long startTime;
-    private int millisBetween; // the time between every two generator
+    int enemyFixed;
+    private int secondsBetween; // the time between every two generator
+    private int numberOfEnemy;
+    private int nextEnemy;
 
-    public EnemyGenerator(int millisBetween) {
-        startTime = TimeUtils.millis();
-        this.millisBetween = millisBetween;
+    public EnemyGenerator(int secondsBetween, int numberOfEnemy) {
+        this.secondsBetween = secondsBetween;
+        this.numberOfEnemy = numberOfEnemy;
+        enemyFixed = (numberOfEnemy);
+        nextEnemy = secondsBetween;
     }
 
-    public void createEnemy(Array<BlockButton> blockButtons, Assets assets) {
-        long timeNow = TimeUtils.millis();
-        if (timeNow> startTime + millisBetween) {
-            startTime = timeNow;
+    public void update(Array<BlockButton> blockButtons, Assets assets, int time) {
+        if (numberOfEnemy> 0 && time== nextEnemy) {
             int random;
-            do
-                random = MathUtils.random(1,48-1);
-            while (random == 5 || random==42);
-
+            do random = MathUtils.random(1,48-1);
+            while (random == 5 || random == 42);
             blockButtons.get(random).setEnemy(1, assets);
-            }
+            numberOfEnemy--;
+            nextEnemy += secondsBetween;
+        }
 
+    }
+
+    public int getEnemyFixed() {
+        return enemyFixed;
     }
 }
 

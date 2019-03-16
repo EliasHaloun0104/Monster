@@ -44,7 +44,7 @@ public class Ball {
         return null;
     }
 
-    public void ballMoving(Array<BlockButton> blockButtons, Sound ping, Sound bongo, Assets assets) {
+    public void ballMoving(Array<BlockButton> blockButtons, ExtendedSound ping, ExtendedSound bongo, ExtendedSound lostBall, Assets assets) {
         //Add the move depend on direction
         direction.move(position);
 
@@ -112,7 +112,9 @@ public class Ball {
             }else{
                 direction = Direction.STOP;
                 timer = new FadeTimer();
+                lostBall.play();
                 isDying = true;
+
             }
 
 

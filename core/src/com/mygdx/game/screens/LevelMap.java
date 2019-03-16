@@ -1,7 +1,5 @@
 package com.mygdx.game.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -16,31 +14,35 @@ import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 public class LevelMap implements Screen {
     Basic screen;
     private Texture background;
+    int numberOfLevel;
 
-    private final int  numberOfLevel = 1;
-    private Array<Button> buttons;
     @Override
     public void show() {
         screen = new Basic();
+        numberOfLevel = 5;
+        Array<Button> buttons;
+
 
         buttons = new Array<>();
+        Button btn;
         for (int i = 0; i < numberOfLevel ; i++) {
-            buttons.add(new Button("block",-1, screen.assets));
-        }
-        for (int i = 0; i < numberOfLevel ; i++) {
-            buttons.get(i).getBtn().setPosition((1 + i*3)*BLOCK_SIZE, 5*BLOCK_SIZE);
-            buttons.get(i).getBtn().setHeight(BLOCK_SIZE*2);
-            buttons.get(i).getBtn().setWidth(BLOCK_SIZE*2);
-            buttons.get(i).getBtn().getImage().setScaling(Scaling.fill);
-            buttons.get(i).getBtn().addListener(new InputListener(){
+            final int iExtra = i+1;
+            btn = new Button("block", -1, screen.assets);
+            btn.getBtn().setPosition((1 + i*3)*BLOCK_SIZE, 4*BLOCK_SIZE);
+            btn.getBtn().setHeight(BLOCK_SIZE*2);
+            btn.getBtn().setWidth(BLOCK_SIZE*2);
+            btn.getBtn().getImage().setScaling(Scaling.fill);
+            btn.getBtn().addListener(new InputListener(){
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    MainGame.getInstance().setScreen(new Play());
+                    MainGame.getInstance().setScreen(new Play(iExtra,3,2,5));
                     return false;
                 }
             });
-            screen.stage.addActor(buttons.get(i).getBtn());
+            screen.stage.addActor(btn.getBtn());
+            buttons.add(new Button("block",-1, screen.assets));
         }
+
         background = new Texture("background2.png");
     }
 
@@ -50,16 +52,13 @@ public class LevelMap implements Screen {
 
         screen.batch.begin();
         screen.batch.draw(background,0,0);
+        for (int i = 1; i <= numberOfLevel; i++) {
+            screen.font.draw(screen.batch, "Level " + i, (1 + (i-1)*3)*BLOCK_SIZE, 4*BLOCK_SIZE);
+        }
         screen.batch.end();
 
         screen.stage.act();
         screen.stage.draw();
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
-            //TODO move between Screens
-            MainGame.getInstance().setScreen(new LevelMap());
-        }
-
 
     }
 
