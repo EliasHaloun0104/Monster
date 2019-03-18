@@ -2,5 +2,13 @@
 <resources>
 
     <string name="app_name">Monsters</string>
+    <string name="facebook_app_id">1225466497602846</string>
+    <string name="fb_login_protocol_scheme">fb1225466497602846</string>
+    <string name="startButton">Start</string>
+    <string name="chatButton">Chat</string>
+    <string name="howToPlayButton">How To Play</string>
+    <string name="aboutUsButton">About Us</string>
+    <string name="exitButton">Exit</string>
+
 
 </resources>

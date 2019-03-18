@@ -1,16 +1,87 @@
 package com.mygdx.game;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-import com.badlogic.gdx.backends.android.AndroidApplication;
-import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.mygdx.game.main.MainGame;
+public class AndroidLauncher extends Activity {
 
-public class AndroidLauncher extends AndroidApplication {
-	@Override
-	protected void onCreate (Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new MainGame(), config);
-	}
+    private Button playButton;
+    private Button chatButton;
+    private Button howToPlayButton;
+    private Button aboutUsButton;
+    private Button secondActivityButton;
+    private Button admintButton;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("prefs", MODE_PRIVATE);
+        String username = pref.getString("username", null);
+
+        if (username != null) {
+
+            setContentView(R.layout.layout);
+
+            playButton = findViewById(R.id.startGame);
+            secondActivityButton = findViewById(R.id.secondButton);
+            chatButton = findViewById(R.id.chat);
+            howToPlayButton = findViewById(R.id.howToPlay);
+            aboutUsButton = findViewById(R.id.aboutUs);
+
+            admintButton = findViewById(R.id.adminButton);
+
+            playButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), GameActivity.class);
+                    startActivity(intent);
+
+                }
+            });
+
+            secondActivityButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), Activity2.class);
+                    startActivity(intent);
+                }
+            });
+            chatButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), ChatActivity.class);
+                    startActivity(intent);
+                }
+            });
+            aboutUsButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), AboutUsActivity.class);
+                    startActivity(intent);
+                }
+            });
+            howToPlayButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), HowToPlayActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            admintButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), AdminActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+        }
+
+        else {
+            Intent intent = new Intent(this.getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 }
