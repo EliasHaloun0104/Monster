@@ -16,10 +16,18 @@ public class AndroidLauncher extends Activity {
     private Button secondActivityButton;
     private Button admintButton;
 
+    private InternetConnection connection = new InternetConnection();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        if (connection.isOnline(getApplicationContext())) {
+            System.out.println("ONLINE");
+        } else {
+            System.out.println("OFFLINE");
+        }
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("prefs", MODE_PRIVATE);
         String username = pref.getString("username", null);
