@@ -20,6 +20,12 @@
     <string name="user_name">User Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="profile_user_name">User Name</string>
+    <string name="profile_status">Hi there, I\'m using Monsters chat app!</string>
+    <string name="change_status">CHANGE STATUS</string>
+    <string name="profile">Profile</string>
+    <string name="pick_a_new_status">Pick a new status</string>
+    <string name="save">SAVE</string>
 
 
 </resources>
