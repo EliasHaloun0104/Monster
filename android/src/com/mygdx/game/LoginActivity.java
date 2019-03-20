@@ -35,6 +35,10 @@ public class LoginActivity extends Activity {
     private LoginButton faceLog;
     private TextView staus;
     private CallbackManager callbackManager;
+
+    private Button signInBtn;
+    private Button signUpBtn;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -44,8 +48,31 @@ public class LoginActivity extends Activity {
         login = findViewById(R.id.loginButton);
         faceLog = findViewById(R.id.facelog);
         staus = findViewById(R.id.status);
+
+        signInBtn = findViewById(R.id.login_signInBtn);
+        signUpBtn = findViewById(R.id.login_signUp);
+
+        signInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signInIntent = new Intent(LoginActivity.this,SignInActivity.class);
+                startActivity(signInIntent);
+
+            }
+        });
+
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signUpIntent = new Intent(LoginActivity.this,SignUpActivity.class);
+                startActivity(signUpIntent);
+
+            }
+        });
+        /*
         SharedPreferences pref = getApplicationContext().getSharedPreferences("prefs", MODE_PRIVATE);
         final SharedPreferences.Editor editor = pref.edit();
+
 
         //for now if the users presses login just login and save login.....
         login.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +87,7 @@ public class LoginActivity extends Activity {
                 finish();
             }
         });
+
 
         faceLog.setReadPermissions(Arrays.asList("email","public_profile"));
         // If you are using in a fragment, call loginButton.setFragment(this);
@@ -128,6 +156,7 @@ public class LoginActivity extends Activity {
         parameters.putString("fields","first_name,last_name,email,id");
         graphRequest.setParameters(parameters);
         graphRequest.executeAsync();
-
+*/
     }
+
 }
