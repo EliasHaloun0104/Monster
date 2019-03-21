@@ -31,11 +31,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class LoginActivity extends Activity {
@@ -45,7 +48,9 @@ public class LoginActivity extends Activity {
     private TextView staus;
     private CallbackManager callbackManager;
     private FirebaseAuth mAuth;
-
+    //Database
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
     private Button signInBtn;
     private Button signUpBtn;
 
@@ -150,6 +155,17 @@ public class LoginActivity extends Activity {
                     String last_name = object.getString("last_name");
                     String email = object.getString("email");
                     String id = object.getString("id");
+
+
+                    database = FirebaseDatabase.getInstance();
+                    databaseReference = database.getReference().child("Users").child(id);
+
+                    HashMap<String, String> userMap = new HashMap<>();
+                    userMap.put("name", first_name+" "+last_name);
+                    userMap.put("status", "Hi there, I'm using HKR Monsters App.");
+                    databaseReference.setValue(userMap);
+
+                    databaseReference.setValue(userMap);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
