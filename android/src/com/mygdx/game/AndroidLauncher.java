@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -18,6 +19,7 @@ public class AndroidLauncher extends Activity {
     private Button secondActivityButton;
     private Button admintButton;
     private Button signOutButton;
+    private LoginManager loginManager;
 
     //Firebase
     private FirebaseAuth mAuth;
@@ -103,6 +105,7 @@ public class AndroidLauncher extends Activity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
+                LoginManager.getInstance().logOut();
                 Intent intent = new Intent(AndroidLauncher.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
