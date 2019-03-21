@@ -58,7 +58,11 @@ public class ChatActivity extends AppCompatActivity {
 
 
         if (item.getItemId() == R.id.menu_profileBtn) {
-            Intent allUsersIntent = new Intent(ChatActivity.this, ProfileActivity.class);
+            Intent profileSettings = new Intent(ChatActivity.this, ProfileSettingsActivity.class);
+            startActivity(profileSettings);
+        }
+        if (item.getItemId() == R.id.menu_usersBtn) {
+            Intent allUsersIntent = new Intent(ChatActivity.this, UsersActivity.class);
             startActivity(allUsersIntent);
         }
 
