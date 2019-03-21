@@ -51,6 +51,7 @@ public class StatusActivity extends AppCompatActivity {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String uid = currentUser.getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        databaseReference.keepSynced(true);
 
         String status_value = getIntent().getStringExtra("status_value");
         newStatus.getEditText().setText(status_value);

@@ -29,6 +29,7 @@ public class UsersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_users);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        databaseReference.keepSynced(true);
 
         usersList = findViewById(R.id.users_list);
         usersList.setHasFixedSize(true);

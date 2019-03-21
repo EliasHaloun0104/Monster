@@ -52,6 +52,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
             String currint_uid = currentUser.getUid();
             userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currint_uid);
+            userDatabase.keepSynced(true);
 
             userDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
