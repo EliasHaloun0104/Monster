@@ -18,7 +18,6 @@ public class AndroidLauncher extends Activity {
     private Button secondActivityButton;
     private Button admintButton;
     private Button signOutButton;
-    private Button profileButton;
 
     //Firebase
     private FirebaseAuth mAuth;
@@ -55,17 +54,11 @@ public class AndroidLauncher extends Activity {
         howToPlayButton = findViewById(R.id.howToPlay);
         aboutUsButton = findViewById(R.id.aboutUs);
         signOutButton = findViewById(R.id.signOutBtn);
-        profileButton = findViewById(R.id.profile);
+
 
         admintButton = findViewById(R.id.adminButton);
 
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent profileIntent = new Intent(AndroidLauncher.this,ProfileActivity.class);
-                startActivity(profileIntent);
-            }
-        });
+
         playButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), GameActivity.class);

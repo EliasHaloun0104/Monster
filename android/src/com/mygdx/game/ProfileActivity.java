@@ -1,10 +1,12 @@
 package com.mygdx.game;
 
-import android.app.Activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileActivity extends Activity {
+public class ProfileActivity extends AppCompatActivity {
 
 
     private TextView status;
@@ -42,6 +44,7 @@ public class ProfileActivity extends Activity {
         status = findViewById(R.id.profile_status);
         changeStatusBtn = findViewById(R.id.profile_changeStatus);
         profilePic = findViewById(R.id.profile_image);
+
 
         //Database
         try {

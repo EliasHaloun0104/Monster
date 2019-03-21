@@ -1,15 +1,18 @@
 package com.mygdx.game;
 
-import android.app.Activity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,11 +20,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SignInActivity extends Activity {
+public class SignInActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
     private Button signInBtn;
-    private EditText signInEmail;
-    private  EditText signInPassword;
+    private TextInputLayout signInEmail;
+    private  TextInputLayout signInPassword;
 
     private ProgressDialog progressDialog;
 
@@ -42,12 +46,16 @@ public class SignInActivity extends Activity {
         signInEmail = findViewById(R.id.signIn_email);
         signInPassword = findViewById(R.id.signIn_password);
         signInBtn = findViewById(R.id.signIn_signIn);
+        toolbar = findViewById(R.id.signIn_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Login");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = signInEmail.getText().toString();
-                String password = signInPassword.getText().toString();
+                String email = signInEmail.getEditText().getText().toString();
+                String password = signInPassword.getEditText().getText().toString();
 
                 if (!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {
                     progressDialog.setTitle("Logging in");

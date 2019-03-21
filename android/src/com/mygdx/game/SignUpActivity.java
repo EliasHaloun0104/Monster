@@ -1,15 +1,18 @@
 package com.mygdx.game;
 
-import android.app.Activity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,12 +25,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-public class SignUpActivity extends Activity {
+public class SignUpActivity extends AppCompatActivity {
 
     private Button createAccountBtn;
-    private EditText regEmail;
-    private EditText regPassword;
-    private EditText regUserName;
+    private TextInputLayout regEmail;
+    private TextInputLayout regPassword;
+    private TextInputLayout regUserName;
+
+    private Toolbar toolbar;
 
     //Database
     private FirebaseDatabase database;
@@ -51,6 +56,10 @@ public class SignUpActivity extends Activity {
         regEmail = findViewById(R.id.reg_email);
         regUserName = findViewById(R.id.reg_userName);
         regPassword = findViewById(R.id.reg_password);
+        toolbar = findViewById(R.id.reg_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         progressDialog = new ProgressDialog(this);
 
@@ -58,9 +67,9 @@ public class SignUpActivity extends Activity {
         createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String display_string = regUserName.getText().toString();
-                String email_string = regEmail.getText().toString();
-                String password_string = regPassword.getText().toString();
+                String display_string = regUserName.getEditText().getText().toString();
+                String email_string = regEmail.getEditText().getText().toString();
+                String password_string = regPassword.getEditText().getText().toString();
 
                 if (!TextUtils.isEmpty(display_string) || !TextUtils.isEmpty(email_string)
                         || !TextUtils.isEmpty(password_string)) {

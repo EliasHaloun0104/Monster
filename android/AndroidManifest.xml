@@ -14,7 +14,8 @@
             android:name="com.mygdx.game.AndroidLauncher"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,14 +25,16 @@
             android:name="com.mygdx.game.GameActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme">
 
         </activity>
         <activity
             android:name="com.mygdx.game.Activity2"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme">
 
         </activity>
 
@@ -39,63 +42,76 @@
             android:name="com.mygdx.game.ProfileActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
 
         </activity>
         <activity
             android:name="com.mygdx.game.StatusActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:parentActivityName=".ProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
 
         </activity>
         <activity
             android:name="com.mygdx.game.AdminActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme">
 
         </activity>
         <activity
             android:name="com.mygdx.game.SignInActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="portrait"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppTheme">
 
         </activity>
         <activity
             android:name="com.mygdx.game.SignUpActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="portrait"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppTheme">
 
         </activity>
         <activity
             android:name="com.mygdx.game.ChatActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="portrait"
+            android:parentActivityName=".AndroidLauncher"
+            android:theme="@style/AppTheme">
 
         </activity>
         <activity
             android:name="com.mygdx.game.AboutUsActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme">
 
         </activity>
         <activity
             android:name="com.mygdx.game.HowToPlayActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme">
 
         </activity>
         <activity
             android:name="com.mygdx.game.LoginActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme">
 
         </activity>
 

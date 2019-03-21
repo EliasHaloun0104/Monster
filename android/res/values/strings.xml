@@ -26,6 +26,8 @@
     <string name="profile">Profile</string>
     <string name="pick_a_new_status">Pick a new status</string>
     <string name="save">SAVE</string>
+    <string name="status_status">Status</string>
+    <string name="hint_user_name">User Name</string>
 
 
 </resources>

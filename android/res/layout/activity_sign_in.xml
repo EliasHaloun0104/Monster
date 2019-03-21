@@ -4,8 +4,14 @@
     android:layout_height="match_parent"
     android:background="#fff">
 
+    <include
+        android:id="@+id/signIn_toolbar"
+        layout="@layout/app_toolbar" />
+
+
     <TextView
         android:id="@+id/signIn_textview"
+        android:layout_below="@id/signIn_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -15,6 +21,38 @@
         android:textColor="#000"
         android:textSize="30sp"
         android:textStyle="bold" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signIn_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signIn_textview"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="20dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signIn_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signIn_email"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
 
 
     <Button
@@ -34,28 +72,6 @@
         android:textSize="18sp"
         android:textStyle="italic"
         android:translationZ="5dp" />
-
-    <EditText
-        android:id="@+id/signIn_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/signIn_email"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:ems="10"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/signIn_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/signIn_textview"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="20dp"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
 
 
 </RelativeLayout>
