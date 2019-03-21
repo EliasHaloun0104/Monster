@@ -98,7 +98,6 @@ public class LevelDetails {
         stringBuilder.append("Ball: " + ballsNo + "\n");
         stringBuilder.append("Enemy: " + (enemyGenerator.getEnemyFixed()-hitMonster.getCounter())+ "\n");
         font.draw(batch, stringBuilder, 40 , BLOCK_SIZE *6 -BLOCK_SIZE/2);
-        //TODO draw ball on the base
         if(ballsNo>0){
             batch.draw(ball, 13*BLOCK_SIZE, BLOCK_SIZE);
         }

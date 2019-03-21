@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -25,6 +26,7 @@ public class Play implements Screen {
 
     private Texture background;
     private LevelDetails levelDetails;
+    private Music music;
 
 
     private float timeSec;
@@ -32,13 +34,19 @@ public class Play implements Screen {
     private Array<BlockButton> blockButtons;
     private Button ballButton;
 
-    public Play(int level, int enemy, int balls, int secondsBetween ) {
+    public Play(int level) {
+
         screen = new Basic();
+        int enemy = (int) Math.pow(level, level+2);
+        int balls = level *2;
+        int secondsBetween = level<4?5:4;
         levelDetails = new LevelDetails(level,enemy, balls, secondsBetween,screen);
     }
 
     @Override
     public void show() {
+        music = Gdx.audio.newMusic(Gdx.files.internal("gameMusic.mp3"));
+        music.play();
         timeSec = 0;
 
         background = new Texture("background2.png");
@@ -122,6 +130,7 @@ public class Play implements Screen {
     public void dispose() {
         screen.dispose();
         background.dispose();
+        music.dispose();
     }
 
 

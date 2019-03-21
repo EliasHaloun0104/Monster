@@ -1,6 +1,8 @@
 package com.mygdx.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -12,14 +14,22 @@ import com.mygdx.game.main.MainGame;
 import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 
 public class LevelMap implements Screen {
+    Music music;
+
     Basic screen;
     private Texture background;
     int numberOfLevel;
+    int openedLevel;
 
     @Override
     public void show() {
+        music = Gdx.audio.newMusic(Gdx.files.internal("gameMusic.mp3"));
         screen = new Basic();
         numberOfLevel = 5;
+        // TODO get the score to decide number of opened level
+        openedLevel = 3;
+
+
         Array<Button> buttons;
 
 
@@ -32,18 +42,23 @@ public class LevelMap implements Screen {
             btn.getBtn().setHeight(BLOCK_SIZE*2);
             btn.getBtn().setWidth(BLOCK_SIZE*2);
             btn.getBtn().getImage().setScaling(Scaling.fill);
-            btn.getBtn().addListener(new InputListener(){
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    MainGame.getInstance().setScreen(new Play(iExtra,3,2,5));
-                    return false;
-                }
-            });
+            if(iExtra<=openedLevel) {
+                btn.getBtn().addListener(new InputListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        MainGame.getInstance().setScreen(new Play(iExtra));
+                        return false;
+                    }
+                });
+            }else{
+                btn.getBtn().setDisabled(true);
+            }
             screen.stage.addActor(btn.getBtn());
             buttons.add(new Button("block",-1, screen.assets));
         }
 
         background = new Texture("background2.png");
+        music.play();
     }
 
     @Override
@@ -84,6 +99,6 @@ public class LevelMap implements Screen {
 
     @Override
     public void dispose() {
-
+        music.dispose();
     }
 }

@@ -38,7 +38,7 @@ public class EndGame implements Screen {
 
         screen.batch.begin();
         screen.batch.draw(background,0,0);
-        screen.font.draw(screen.batch, string, 4*BLOCK_SIZE, 5*BLOCK_SIZE);
+        screen.font.draw(screen.batch, string, 6*BLOCK_SIZE, 5*BLOCK_SIZE);
         screen.batch.end();
 
         screen.stage.act();
