@@ -28,6 +28,7 @@
     <string name="save">SAVE</string>
     <string name="status_status">Status</string>
     <string name="hint_user_name">User Name</string>
+    <string name="users">Users</string>
 
 
 </resources>

@@ -4,5 +4,8 @@
     <item
         android:id="@+id/menu_profileBtn"
         android:title="@string/profile" />
+    <item
+        android:id="@+id/menu_usersBtn"
+        android:title="@string/users" />
 
 </menu>

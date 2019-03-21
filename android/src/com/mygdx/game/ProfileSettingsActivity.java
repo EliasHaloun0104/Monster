@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileSettingsActivity extends AppCompatActivity {
 
 
     private TextView status;
@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_profile_settings);
 
         userName = findViewById(R.id.profile_userName);
         status = findViewById(R.id.profile_status);
@@ -78,7 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String status_value = status.getText().toString();
 
-                Intent statusIntent = new Intent(ProfileActivity.this,StatusActivity.class);
+                Intent statusIntent = new Intent(ProfileSettingsActivity.this,StatusActivity.class);
                 statusIntent.putExtra("status_value",status_value);
                 startActivity(statusIntent);
             }
