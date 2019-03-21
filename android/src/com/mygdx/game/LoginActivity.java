@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -22,6 +24,13 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +44,7 @@ public class LoginActivity extends Activity {
     private LoginButton faceLog;
     private TextView staus;
     private CallbackManager callbackManager;
+    private FirebaseAuth mAuth;
 
     private Button signInBtn;
     private Button signUpBtn;
@@ -51,7 +61,7 @@ public class LoginActivity extends Activity {
 
         signInBtn = findViewById(R.id.login_signInBtn);
         signUpBtn = findViewById(R.id.login_signUp);
-
+        mAuth = FirebaseAuth.getInstance();
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +98,7 @@ public class LoginActivity extends Activity {
             }
         });
 
-
+        */
         faceLog.setReadPermissions(Arrays.asList("email","public_profile"));
         // If you are using in a fragment, call loginButton.setFragment(this);
         callbackManager = CallbackManager.Factory.create();
@@ -97,10 +107,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
-                editor.putString("username", "nuno");
-                editor.apply();
-                Intent intent = new Intent(LoginActivity.this.getApplicationContext(), AndroidLauncher.class);
-                startActivity(intent);
+                handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
             @Override
@@ -156,7 +163,28 @@ public class LoginActivity extends Activity {
         parameters.putString("fields","first_name,last_name,email,id");
         graphRequest.setParameters(parameters);
         graphRequest.executeAsync();
-*/
+
+    }
+    private void handleFacebookAccessToken(AccessToken token) {
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            Intent intent = new Intent(LoginActivity.this.getApplicationContext(), AndroidLauncher.class);
+                            startActivity(intent);
+
+                        } else {
+
+
+                        }
+                    }
+
+
+                });
     }
 
 }
