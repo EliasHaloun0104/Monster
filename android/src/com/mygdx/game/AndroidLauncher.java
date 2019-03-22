@@ -112,7 +112,7 @@ public class AndroidLauncher extends Activity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                LoginManager.getInstance().logOut();
+                loginManager.getInstance().logOut();
                 Intent intent = new Intent(AndroidLauncher.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
