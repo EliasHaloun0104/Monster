@@ -19,6 +19,7 @@ public class AndroidLauncher extends Activity {
     private Button secondActivityButton;
     private Button admintButton;
     private Button signOutButton;
+    private Button shareButton;
     private LoginManager loginManager;
 
     //Firebase
@@ -56,7 +57,7 @@ public class AndroidLauncher extends Activity {
         howToPlayButton = findViewById(R.id.howToPlay);
         aboutUsButton = findViewById(R.id.aboutUs);
         signOutButton = findViewById(R.id.signOutBtn);
-
+        shareButton = findViewById(R.id.sharebtn);
 
         admintButton = findViewById(R.id.adminButton);
 
@@ -100,7 +101,13 @@ public class AndroidLauncher extends Activity {
                 startActivity(intent);
             }
         });
-
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ShareFB.class);
+                startActivity(intent);
+            }
+        });
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

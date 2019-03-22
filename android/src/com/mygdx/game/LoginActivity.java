@@ -54,6 +54,9 @@ public class LoginActivity extends Activity {
     private Button signInBtn;
     private Button signUpBtn;
 
+    //test
+    private Button rami;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -64,9 +67,20 @@ public class LoginActivity extends Activity {
         faceLog = findViewById(R.id.facelog);
         staus = findViewById(R.id.status);
 
+        //test
+        rami = findViewById(R.id.rami2);
         signInBtn = findViewById(R.id.login_signInBtn);
         signUpBtn = findViewById(R.id.login_signUp);
         mAuth = FirebaseAuth.getInstance();
+
+        //test
+        rami.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent qwe = new Intent(LoginActivity.this,ShareFB.class);
+                startActivity(qwe);
+            }
+        });
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,9 +119,9 @@ public class LoginActivity extends Activity {
 
         */
         faceLog.setReadPermissions(Arrays.asList("email","public_profile"));
-        // If you are using in a fragment, call loginButton.setFragment(this);
+
         callbackManager = CallbackManager.Factory.create();
-        // Callback registration
+
         faceLog.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
