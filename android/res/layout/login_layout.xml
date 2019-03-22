@@ -47,6 +47,19 @@
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
         app:layout_constraintVertical_bias="0.515" />
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/google_signIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/facelog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton">
+
+    </com.google.android.gms.common.SignInButton>
+
     <TextView
         android:id="@+id/status"
         android:layout_width="142dp"
@@ -89,20 +102,6 @@
         app:layout_constraintStart_toEndOf="@+id/status"
         app:layout_constraintTop_toBottomOf="@+id/login_signInBtn"
         app:layout_constraintVertical_bias="0.182" />
-
-    <Button
-        android:id="@+id/rami2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/facelog"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_signUp" />
 
 
 </android.support.constraint.ConstraintLayout>
