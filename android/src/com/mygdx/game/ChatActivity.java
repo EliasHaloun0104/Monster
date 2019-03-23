@@ -10,6 +10,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -20,6 +25,11 @@ public class ChatActivity extends AppCompatActivity {
     private SectionPagerAdapter sectionPagerAdapter;
 
     private TabLayout tabLayout;
+    private DatabaseReference userRef;
+
+
+    //Firebase
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -28,6 +38,12 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        try {
+            userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        } catch (Exception ex) {
+        }
 
         viewPager = findViewById(R.id.chat_viewpager);
         toolbar = findViewById(R.id.chat_toolbar);
@@ -67,5 +83,32 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        try {
+            if (currentUser != null) {
+                userRef.child("online").setValue(true);
+            }
+        } catch (Exception ex) {
+        }
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        try {
+            if (currentUser != null) {
+                userRef.child("online").setValue(false);
+            }
+        } catch (Exception ex) {
+        }
     }
 }

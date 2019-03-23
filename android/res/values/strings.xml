@@ -29,6 +29,8 @@
     <string name="status_status">Status</string>
     <string name="hint_user_name">User Name</string>
     <string name="users">Users</string>
+    <string name="add_friend">ADD FRIEND</string>
+    <string name="decline_request">DECLINE REQUEST</string>
 
 
 </resources>
