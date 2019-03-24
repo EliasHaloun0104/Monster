@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,20 +20,27 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignInActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private Button signInBtn;
     private TextInputLayout signInEmail;
-    private  TextInputLayout signInPassword;
+    private TextInputLayout signInPassword;
 
     private ProgressDialog progressDialog;
 
 
     private FirebaseAuth mAuth;
+    private DatabaseReference rootRef;
+    private DatabaseReference userRef;
+    private String currentUser;
 
 
     @Override
@@ -41,6 +49,7 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         mAuth = FirebaseAuth.getInstance();
+        rootRef = FirebaseDatabase.getInstance().getReference();
 
         progressDialog = new ProgressDialog(this);
 
@@ -59,6 +68,7 @@ public class SignInActivity extends AppCompatActivity {
                 String email = signInEmail.getEditText().getText().toString();
                 String password = signInPassword.getEditText().getText().toString();
 
+
                 if (!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {
                     progressDialog.setTitle("Logging in");
                     progressDialog.setMessage("Please Wait while we check your credentials!");
@@ -75,16 +85,41 @@ public class SignInActivity extends AppCompatActivity {
     private void loginUser(String email, String password) {
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
 
+                if (task.isSuccessful()) {
                     progressDialog.dismiss();
 
-                        Intent mainIntent = new Intent(SignInActivity.this, AndroidLauncher.class);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(mainIntent);
-                        finish();
+                    currentUser = mAuth.getCurrentUser().getUid();
+                    System.out.println("The is the user id " + currentUser);
+                    userRef = rootRef.child("Users").child(currentUser);
+
+                    userRef.child("role").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.getValue().equals("admin")) {
+                                Intent mainIntent = new Intent(SignInActivity.this, AdminActivity.class);
+                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(mainIntent);
+                                finish();
+                            }
+                            if (dataSnapshot.getValue().equals("user")) {
+                                Intent mainIntent = new Intent(SignInActivity.this, AndroidLauncher.class);
+                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(mainIntent);
+                                finish();
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
 
                 } else {
                     progressDialog.hide();
@@ -97,4 +132,5 @@ public class SignInActivity extends AppCompatActivity {
         });
 
     }
+
 }

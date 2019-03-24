@@ -115,7 +115,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
-                handleFacebookAccessToken(loginResult.getAccessToken());
+                getUserprofile(loginResult.getAccessToken());
             }
 
             @Override
@@ -135,40 +135,23 @@ public class LoginActivity extends Activity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
-    AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
-        @Override
-        protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-            if (currentAccessToken == null){
-                //not logged in
-            }else {
-                getUserprofile(currentAccessToken);
-            }
-        }
-    };
 
-    public void getUserprofile(AccessToken accessToken){
+    public void getUserprofile(final AccessToken accessToken){
 
         GraphRequest graphRequest = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
             @Override
             public void onCompleted(JSONObject object, GraphResponse response) {
 
                 try {
+
                     // get the user information
                     String first_name = object.getString("first_name");
                     String last_name = object.getString("last_name");
                     String email = object.getString("email");
                     String id = object.getString("id");
 
-
-                    database = FirebaseDatabase.getInstance();
-                    databaseReference = database.getReference().child("Users").child(id);
-
-                    HashMap<String, String> userMap = new HashMap<>();
-                    userMap.put("name", first_name+" "+last_name);
-                    userMap.put("status", "Hi there, I'm using HKR Monsters App.");
-                    databaseReference.setValue(userMap);
-
-                    databaseReference.setValue(userMap);
+                    //Firebase
+                    handleFacebookAccessToken(accessToken,first_name,last_name);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -184,7 +167,7 @@ public class LoginActivity extends Activity {
         graphRequest.executeAsync();
 
     }
-    private void handleFacebookAccessToken(AccessToken token) {
+    private void handleFacebookAccessToken(AccessToken token, final String first_name, final String last_name) {
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
@@ -192,9 +175,18 @@ public class LoginActivity extends Activity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             Intent intent = new Intent(LoginActivity.this.getApplicationContext(), AndroidLauncher.class);
                             startActivity(intent);
+                            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                            String uid = currentUser.getUid();
+
+                            database = FirebaseDatabase.getInstance();
+                            databaseReference = database.getReference().child("Users").child(uid);
+                            HashMap<String, String> userMap = new HashMap<>();
+                            userMap.put("name", first_name+" "+last_name);
+                            userMap.put("status", "Hi there, I'm using HKR Monsters App.");
+                            userMap.put("role", "user");
+                            databaseReference.setValue(userMap);
 
                         } else {
 
