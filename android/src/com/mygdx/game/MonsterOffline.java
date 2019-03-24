@@ -19,28 +19,29 @@ public class MonsterOffline extends Application {
     public void onCreate() {
         super.onCreate();
 
-        try {
 
 
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
             mAuth = FirebaseAuth.getInstance();
-            userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+            if (mAuth.getCurrentUser()!=null) {
+                userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
 
-            userDatabase.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userDatabase.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    if (dataSnapshot != null) {
-                        userDatabase.child("online").onDisconnect().setValue(false);
+                        if (dataSnapshot != null) {
+                            userDatabase.child("online").onDisconnect().setValue(false);
+                        }
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
-        }catch (Exception ex){}
+                    }
+                });
+            }
+
     }
 }

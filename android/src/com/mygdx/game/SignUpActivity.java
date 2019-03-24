@@ -100,7 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
                     HashMap<String, String> userMap = new HashMap<>();
                     userMap.put("name", display_string);
                     userMap.put("status", "Hi there, I'm using HKR Monsters App.");
-
+                    userMap.put("role", "user");
 
                     databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

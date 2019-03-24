@@ -3,15 +3,15 @@ package com.mygdx.game;
 public class Users {
 
     public String name;
-    public String image;
     public String status;
+    public String role;
 
     public Users() {
     }
 
-    public Users(String name, String image, String status) {
+    public Users(String name, String status, String role) {
         this.name = name;
-        this.image = image;
+
         this.status = status;
     }
 
@@ -23,20 +23,20 @@ public class Users {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
 

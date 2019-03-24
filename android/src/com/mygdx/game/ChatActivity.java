@@ -40,9 +40,8 @@ public class ChatActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        try {
+        if (mAuth.getCurrentUser() != null) {
             userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        } catch (Exception ex) {
         }
 
         viewPager = findViewById(R.id.chat_viewpager);
@@ -77,10 +76,6 @@ public class ChatActivity extends AppCompatActivity {
             Intent profileSettings = new Intent(ChatActivity.this, ProfileSettingsActivity.class);
             startActivity(profileSettings);
         }
-        if (item.getItemId() == R.id.menu_usersBtn) {
-            Intent allUsersIntent = new Intent(ChatActivity.this, UsersActivity.class);
-            startActivity(allUsersIntent);
-        }
 
         return true;
     }
@@ -90,12 +85,10 @@ public class ChatActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        try {
             if (currentUser != null) {
                 userRef.child("online").setValue(true);
             }
-        } catch (Exception ex) {
-        }
+
 
     }
 
@@ -104,11 +97,9 @@ public class ChatActivity extends AppCompatActivity {
         super.onStop();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        try {
             if (currentUser != null) {
                 userRef.child("online").setValue(false);
             }
-        } catch (Exception ex) {
-        }
+
     }
 }
