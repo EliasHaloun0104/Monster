@@ -49,7 +49,7 @@ public class ChatActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Messenger");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         sectionPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager());
 

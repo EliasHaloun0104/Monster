@@ -19,6 +19,9 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 UsersFragment usersFragment = new UsersFragment();
                 return usersFragment;
+            case 2:
+                AdminsFragment adminsFragment = new AdminsFragment();
+                return adminsFragment;
 
 
             default:
@@ -29,7 +32,7 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     public CharSequence getPageTitle(int position) {
@@ -38,6 +41,8 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
                 return "Chat";
             case 1:
                 return "Users";
+            case 2:
+                return "Admins";
 
             default:
                 return null;

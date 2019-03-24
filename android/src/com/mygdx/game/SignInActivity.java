@@ -93,7 +93,7 @@ public class SignInActivity extends AppCompatActivity {
                     progressDialog.dismiss();
 
                     currentUser = mAuth.getCurrentUser().getUid();
-                    System.out.println("The is the user id " + currentUser);
+
                     userRef = rootRef.child("Users").child(currentUser);
 
                     userRef.child("role").addValueEventListener(new ValueEventListener() {
