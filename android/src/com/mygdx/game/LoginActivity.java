@@ -115,7 +115,6 @@ public class LoginActivity extends Activity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
-                //handleFacebookAccessToken(loginResult.getAccessToken());
                 getUserprofile(loginResult.getAccessToken());
             }
 
