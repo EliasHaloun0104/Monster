@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,14 +23,14 @@ public class AndroidLauncher extends Activity {
     private Button admintButton;
     private Button signOutButton;
     private Button shareButton;
+    private Button highscoresButton;
     private LoginManager loginManager;
-
 
 
     //Firebase
     private FirebaseAuth mAuth;
 
-    //  private InternetConnection connection = new InternetConnection();
+    private InternetConnection connection = new InternetConnection();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,6 @@ public class AndroidLauncher extends Activity {
         mAuth = FirebaseAuth.getInstance();
 
 
-
         playButton = findViewById(R.id.startGame);
         secondActivityButton = findViewById(R.id.secondButton);
         chatButton = findViewById(R.id.chat);
@@ -64,6 +64,7 @@ public class AndroidLauncher extends Activity {
         aboutUsButton = findViewById(R.id.aboutUs);
         signOutButton = findViewById(R.id.signOutBtn);
         shareButton = findViewById(R.id.sharebtn);
+        highscoresButton = findViewById(R.id.highscoresButton);
 
         admintButton = findViewById(R.id.adminButton);
 
@@ -114,6 +115,7 @@ public class AndroidLauncher extends Activity {
                 startActivity(intent);
             }
         });
+
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +124,19 @@ public class AndroidLauncher extends Activity {
                 Intent intent = new Intent(AndroidLauncher.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        highscoresButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (connection.isOnline(getApplicationContext())) {
+                    Intent intent = new Intent(v.getContext(), HighScoresActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(AndroidLauncher.this,
+                            "No connection",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

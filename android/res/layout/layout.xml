@@ -103,6 +103,22 @@
                 android:translationZ="5dp" />
 
             <Button
+                android:id="@+id/highscoresButton"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/aboutUs"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="39dp"
+                android:background="@drawable/button_border"
+                android:elevation="5dp"
+                android:stateListAnimator="@null"
+                android:text="@string/highscores"
+                android:textColor="#ffff"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:translationZ="5dp" />
+
+            <Button
                 android:id="@+id/secondButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
