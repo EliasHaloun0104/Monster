@@ -71,9 +71,9 @@ public class LevelDetails {
         enemyGenerator.update(blockButtons, assets, this.timer);
 
         if(ballsNo == 0 && balls.size == 0){
-            MainGame.getInstance().setScreen(new EndGame(this.timer, false));
+            MainGame.getInstance().setScreen(new EndGame(this.level*1000, false));
         }else if(enemyGenerator.getEnemyFixed()- hitMonster.getCounter() == 0) {
-            MainGame.getInstance().setScreen(new EndGame(this.timer, true));
+            MainGame.getInstance().setScreen(new EndGame(this.level*1000, true));
         }
     }
 

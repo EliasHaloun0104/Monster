@@ -6,13 +6,11 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.game.BlockButton;
 import com.mygdx.game.game.Button;
-import com.mygdx.game.game.ExtendedSound;
 import com.mygdx.game.main.LevelDetails;
 import com.mygdx.game.main.MainGame;
 

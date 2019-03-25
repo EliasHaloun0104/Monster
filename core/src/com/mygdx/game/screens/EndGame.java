@@ -20,7 +20,8 @@ public class EndGame implements Screen {
         this.score = score;
         if(isWin){
             string = "Congratulations\n Your score: " + score;
-            //TODO send the result to the server
+            //TODO send the socre to the server
+
         }else{
             string = "You Lost";
         }

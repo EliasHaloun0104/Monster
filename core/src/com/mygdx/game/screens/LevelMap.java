@@ -27,7 +27,8 @@ public class LevelMap implements Screen {
         screen = new Basic();
         numberOfLevel = 5;
         // TODO get the score to decide number of opened level
-        openedLevel = 3;
+        int score = 1000;
+        openedLevel = score/1000 + 1 ;
 
 
         Array<Button> buttons;
