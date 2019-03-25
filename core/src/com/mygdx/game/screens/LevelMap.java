@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,7 +28,11 @@ public class LevelMap implements Screen {
         screen = new Basic();
         numberOfLevel = 5;
         // TODO get the score to decide number of opened level
-        int score = 1000;
+        int score = 0;
+        Preferences prefs = Gdx.app.getPreferences("prefs");
+        prefs.getString("score", "0");
+        prefs.flush();
+
         openedLevel = score/1000 + 1 ;
 
 

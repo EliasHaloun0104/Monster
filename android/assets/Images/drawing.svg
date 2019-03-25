@@ -366,10 +366,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.4497496"
-     inkscape:cx="-71.55097"
-     inkscape:cy="1312.0998"
+     inkscape:cx="-460.82585"
+     inkscape:cy="1312.333"
      inkscape:document-units="mm"
-     inkscape:current-layer="g2226"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1366"
      inkscape:window-height="745"
@@ -703,10 +703,10 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888903px;font-family:Perpetua;-inkscape-font-specification:Perpetua;fill:#58ab87;fill-opacity:1;stroke-width:0.24152437" /></text>
     <g
        id="g1220"
-       transform="translate(-236.12956,-304.40364)"
+       transform="translate(-180.83027,-401.47154)"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"
-       inkscape:export-filename="C:\Users\ELHA0104\LibGdx\test\android\assets\background.png">
+       inkscape:export-filename="C:\Users\ELHA0104\LibGdx\test\android\assets\LogoGB.png">
       <circle
          r="16.205137"
          cy="221.94612"
@@ -859,9 +859,9 @@
     <g
        inkscape:export-ydpi="96"
        inkscape:export-xdpi="96"
-       transform="translate(-236.12956,-304.40364)"
+       transform="translate(-180.83027,-401.47154)"
        id="g1434"
-       inkscape:export-filename="C:\Users\ELHA0104\LibGdx\test\android\assets\background.png">
+       inkscape:export-filename="C:\Users\ELHA0104\LibGdx\test\android\assets\LogoGB.png">
       <circle
          style="opacity:1;fill:#cd5b5b;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.0514369;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:9.05315113;stroke-opacity:1"
          id="circle1428"
@@ -885,9 +885,9 @@
     <g
        inkscape:export-ydpi="96"
        inkscape:export-xdpi="96"
-       transform="matrix(0.7812502,0,0,0.7812502,-416.57401,-100.87248)"
+       transform="matrix(0.70312518,0,0,0.70312518,-253.71596,-170.40693)"
        id="g1508"
-       inkscape:export-filename="C:\Users\ELHA0104\LibGdx\test\android\assets\background.png">
+       inkscape:export-filename="C:\Users\ELHA0104\Desktop\monster.png">
       <path
          inkscape:connector-curvature="0"
          style="fill:#498a68;stroke-width:0.26458332"
@@ -2358,14 +2358,14 @@
       <image
          sodipodi:absref="C:\Users\ELHA0104\LibGdx\test\android\assets\Images\logo.sv.png"
          xlink:href="logo.sv.png"
-         inkscape:export-ydpi="96"
-         inkscape:export-xdpi="96"
-         width="31.730015"
-         height="11.402974"
-         preserveAspectRatio="none"
-         id="image2345"
+         y="172.4377"
          x="-348.16895"
-         y="172.4377" />
+         id="image2345"
+         preserveAspectRatio="none"
+         height="11.402974"
+         width="31.730015"
+         inkscape:export-xdpi="96"
+         inkscape:export-ydpi="96" />
       <text
          xml:space="preserve"
          style="font-style:italic;font-variant:normal;font-weight:400;font-size:3.88606763px;line-height:114.67659473%;font-family:'Times New Roman';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#4a575d;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -3134,5 +3134,15 @@
          style="fill:#498a68;stroke-width:0.26458332"
          inkscape:connector-curvature="0" />
     </g>
+    <rect
+       style="opacity:1;fill:none;fill-opacity:0.52777782;fill-rule:nonzero;stroke:none;stroke-width:0.07057665;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:7.55905533;stroke-opacity:1"
+       id="rect1363"
+       width="105.83334"
+       height="105.83334"
+       x="-86.478676"
+       y="-167.10214"
+       inkscape:export-filename="C:\Users\ELHA0104\Desktop\monster.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
   </g>
 </svg>
