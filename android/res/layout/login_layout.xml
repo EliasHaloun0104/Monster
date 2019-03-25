@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/login_bg"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="419dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/monsterbg" />
 
@@ -22,11 +22,13 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/button_border"
         android:text="@string/sign_in_login"
+        android:elevation="20dp"
         android:textColor="#FFF"
         android:textSize="20sp" />
 
     <Button
         android:id="@+id/login_signUp"
+        android:elevation="20dp"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_signInBtn"
@@ -42,6 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/login_signUp"
+        android:elevation="20dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
 
