@@ -1,13 +1,19 @@
 package com.mygdx.game;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.math.Interpolation;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,6 +22,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AndroidLauncher extends Activity {
 
@@ -29,16 +48,20 @@ public class AndroidLauncher extends Activity {
     private Button highscoresButton;
     private LoginManager loginManager;
 
+    private ApiInterface apiInterface;
+
 
     //Firebase
     private FirebaseAuth mAuth;
 
     private InternetConnection connection = new InternetConnection();
+    UserDetailsSingleton user = UserDetailsSingleton.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
 
 
         /*
@@ -141,6 +164,10 @@ public class AndroidLauncher extends Activity {
     @Override
     public void onStart() {
         super.onStart();
+
+
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -174,6 +201,12 @@ public class AndroidLauncher extends Activity {
             startActivity(intent);
             finish();
         }
+        try {
+            getUserName();
+            isHighScore(user.getUsername(), fetchScorefromLibGDX());
+        } catch (NullPointerException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     private void getUserName() {
@@ -183,9 +216,9 @@ public class AndroidLauncher extends Activity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String userName = dataSnapshot.getValue().toString();
-
-                System.out.println("User name: " + userName);
-
+                //System.out.println("User name: " + userName);
+                UserDetailsSingleton user = UserDetailsSingleton.getInstance();
+                user.setUsername(userName);
             }
 
             @Override
@@ -195,4 +228,90 @@ public class AndroidLauncher extends Activity {
         });
     }
 
+    private int fetchScorefromLibGDX() {
+
+        String score = "";
+        try {
+            Preferences prefs = Gdx.app.getPreferences("prefs");
+            score = prefs.getString("score", "No name stored");
+            if(!score.equals("No name stored")) {
+                return Integer.parseInt(score);
+            }
+        } catch (NullPointerException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+
+    //check if score is highscore and if so call method to update highscore
+    private void isHighScore(final String username, final int score) {
+
+        Call<List<HighScore>> highScoreCall = apiInterface.getScore(username);
+
+        highScoreCall.enqueue(new Callback<List<HighScore>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<HighScore>> call, @NonNull Response<List<HighScore>> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().get(0).getScore() < score) {
+                        updateHighScore(username, score);
+
+//                        Toast.makeText(AndroidLauncher.this,
+//                                "update highscore",
+//                                Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        Toast.makeText(AndroidLauncher.this,
+                                "dont update highscore",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<HighScore>> call, @NonNull Throwable t) {
+//                Toast.makeText(AndroidLauncher.this,
+//                        t.getLocalizedMessage(),
+//                        Toast.LENGTH_SHORT).show();
+            }
+
+        });
+    }
+
+    //updates highscore
+    private void updateHighScore(String username, int score) {
+
+        Call<HighScore> highScoreCall = apiInterface.updateHighScore(username, score);
+
+        highScoreCall.enqueue(new Callback<HighScore>() {
+            @Override
+            public void onResponse(@NonNull Call<HighScore> call, @NonNull Response<HighScore> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    boolean success = response.body().isSuccess();
+                    if (success) {
+//                            Toast.makeText(HighScoresActivity.this,
+//                                    response.body().getMessage(),
+//                                    Toast.LENGTH_SHORT).show();
+                        //finish();
+                        System.out.println("SUCCESS");
+                    } else {
+//                            Toast.makeText(HighScoresActivity.this,
+//                                    response.body().getMessage(),
+//                                    Toast.LENGTH_SHORT).show();
+                        //finish();
+                        System.out.println("FAILED");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<HighScore> call, @NonNull Throwable t) {
+//                Toast.makeText(AndroidLauncher.this,
+//                        t.getLocalizedMessage(),
+//                        Toast.LENGTH_SHORT).show();
+                System.out.println("FAILED 2");
+            }
+        });
+
+    }
 }

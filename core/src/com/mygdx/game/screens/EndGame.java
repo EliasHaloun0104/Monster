@@ -1,5 +1,9 @@
 package com.mygdx.game.screens;
 
+
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.main.MainGame;
@@ -21,6 +25,10 @@ public class EndGame implements Screen {
         if(isWin){
             string = "Congratulations\n Your score: " + score;
             //TODO send the socre to the server
+
+            Preferences prefs = Gdx.app.getPreferences("prefs");
+            prefs.putString("score", String.valueOf(score));
+            prefs.flush();
 
         }else{
             string = "You Lost";
@@ -77,4 +85,5 @@ public class EndGame implements Screen {
     public void dispose() {
 
     }
+
 }
