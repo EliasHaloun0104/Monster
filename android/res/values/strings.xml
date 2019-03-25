@@ -38,6 +38,7 @@
     <string name="sign_up_login">Sign up</string>
     <string name="sign_in_login">Sign in</string>
     <string name="score_change">Score</string>
+    <string name="highscores_txt">HIGHSCORES</string>
 
 
 </resources>

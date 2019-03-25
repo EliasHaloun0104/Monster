@@ -16,9 +16,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView name, status,score;
+    private ApiInterface apiInterface;
+    private TextView name, status, scoreTxt;
     private ImageView profileImageView;
 
     private DatabaseReference usersDatabase;
@@ -28,16 +35,16 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
         final String userId = getIntent().getStringExtra("user_id");
 
         profileImageView = findViewById(R.id.prof_image);
         name = findViewById(R.id.prof_userName);
         status = findViewById(R.id.prof_status);
-        score = findViewById(R.id.prof_scoreTxt);
+        scoreTxt = findViewById(R.id.prof_scoreTxt);
 
         usersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-
 
 
         usersDatabase.addValueEventListener(new ValueEventListener() {
@@ -49,6 +56,9 @@ public class ProfileActivity extends AppCompatActivity {
                 name.setText(display_name);
                 status.setText(display_status);
 
+                getHighScore(display_name);
+
+
             }
 
             @Override
@@ -57,5 +67,41 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getHighScore(final String username) {
+
+
+        Call<List<HighScore>> highScoreCall = apiInterface.getScore(username);
+
+        highScoreCall.enqueue(new Callback<List<HighScore>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<HighScore>> call, @NonNull Response<List<HighScore>> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+                    int score = response.body().get(0).getScore();
+                    scoreTxt.setText(String.valueOf(score));
+                    System.out.println(String.valueOf(score).toUpperCase());
+
+
+                    // Toast.makeText(ProfileSettingsActivity.this,
+                    //       "got highscore",
+                    //     Toast.LENGTH_SHORT).show();
+                } else {
+
+                    //   Toast.makeText(ProfileSettingsActivity.this,
+                    //         "didn't get highscore",
+                    //       Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<HighScore>> call, @NonNull Throwable t) {
+                //  Toast.makeText(ProfileSettingsActivity.this,
+                //        t.getLocalizedMessage(),
+                //      Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 }

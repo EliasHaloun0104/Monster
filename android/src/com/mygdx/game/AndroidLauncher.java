@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,12 +37,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AndroidLauncher extends Activity {
+public class AndroidLauncher extends AppCompatActivity {
 
     private Button playButton;
     private Button chatButton;
     private Button howToPlayButton;
-    private Button aboutUsButton;
 
     private Button signOutButton;
     private Button shareButton;
@@ -86,7 +86,6 @@ public class AndroidLauncher extends Activity {
         playButton = findViewById(R.id.startGame);
         chatButton = findViewById(R.id.chat);
         howToPlayButton = findViewById(R.id.howToPlay);
-        aboutUsButton = findViewById(R.id.aboutUs);
         signOutButton = findViewById(R.id.signOutBtn);
         shareButton = findViewById(R.id.sharebtn);
         highscoresButton = findViewById(R.id.highscoresButton);
@@ -106,12 +105,7 @@ public class AndroidLauncher extends Activity {
                 startActivity(intent);
             }
         });
-        aboutUsButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AboutUsActivity.class);
-                startActivity(intent);
-            }
-        });
+
         howToPlayButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), HowToPlayActivity.class);
@@ -234,7 +228,7 @@ public class AndroidLauncher extends Activity {
         try {
             Preferences prefs = Gdx.app.getPreferences("prefs");
             score = prefs.getString("score", "No name stored");
-            if(!score.equals("No name stored")) {
+            if (!score.equals("No name stored")) {
                 return Integer.parseInt(score);
             }
         } catch (NullPointerException ex) {
