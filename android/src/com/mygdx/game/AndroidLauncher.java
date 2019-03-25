@@ -23,8 +23,7 @@ public class AndroidLauncher extends Activity {
     private Button chatButton;
     private Button howToPlayButton;
     private Button aboutUsButton;
-    private Button secondActivityButton;
-    private Button admintButton;
+
     private Button signOutButton;
     private Button shareButton;
     private Button highscoresButton;
@@ -62,15 +61,12 @@ public class AndroidLauncher extends Activity {
 
 
         playButton = findViewById(R.id.startGame);
-        secondActivityButton = findViewById(R.id.secondButton);
         chatButton = findViewById(R.id.chat);
         howToPlayButton = findViewById(R.id.howToPlay);
         aboutUsButton = findViewById(R.id.aboutUs);
         signOutButton = findViewById(R.id.signOutBtn);
         shareButton = findViewById(R.id.sharebtn);
         highscoresButton = findViewById(R.id.highscoresButton);
-
-        admintButton = findViewById(R.id.adminButton);
 
 
         playButton.setOnClickListener(new View.OnClickListener() {
@@ -81,12 +77,6 @@ public class AndroidLauncher extends Activity {
             }
         });
 
-        secondActivityButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), Activity2.class);
-                startActivity(intent);
-            }
-        });
         chatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ChatActivity.class);
@@ -106,12 +96,6 @@ public class AndroidLauncher extends Activity {
             }
         });
 
-        admintButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AdminActivity.class);
-                startActivity(intent);
-            }
-        });
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,7 +143,7 @@ public class AndroidLauncher extends Activity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser!=null){
+        if (currentUser != null) {
             DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
             DatabaseReference userRef = rootRef.child("Users").child(currentUser.getUid());
 

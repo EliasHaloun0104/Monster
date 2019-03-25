@@ -36,8 +36,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
             <Button
                 android:id="@+id/chat"
                 android:layout_width="120dp"
@@ -118,30 +116,6 @@
                 android:textStyle="italic"
                 android:translationZ="5dp" />
 
-            <Button
-                android:id="@+id/secondButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="200dp"
-                android:layout_marginTop="350dp"
-                android:text="Go to other activity"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.65" />
-            <Button
-                android:id="@+id/adminButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="370dp"
-                android:layout_marginTop="350dp"
-                android:text="Admin"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.65" />
 
             <Button
                 android:id="@+id/sharebtn"

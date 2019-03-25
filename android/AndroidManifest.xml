@@ -6,11 +6,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".MonsterOffline"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/GdxTheme"
-        android:name=".MonsterOffline">
+        android:theme="@style/GdxTheme">
         <activity
             android:name="com.mygdx.game.AndroidLauncher"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
@@ -30,15 +30,6 @@
             android:theme="@style/AppTheme">
 
         </activity>
-        <activity
-            android:name="com.mygdx.game.Activity2"
-            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme">
-
-        </activity>
-
         <activity
             android:name="com.mygdx.game.ProfileSettingsActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
@@ -69,8 +60,8 @@
             android:name="com.mygdx.game.ChangeScoreActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
             android:parentActivityName=".AdminActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
 
         </activity>
@@ -172,15 +163,15 @@
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-        <provider android:authorities="com.facebook.app.FacebookContentProvider1225466497602846"
+        <provider
             android:name="com.facebook.FacebookContentProvider"
-            android:exported="true"/>
+            android:authorities="com.facebook.app.FacebookContentProvider1225466497602846"
+            android:exported="true" />
     </application>
 
 </manifest>
