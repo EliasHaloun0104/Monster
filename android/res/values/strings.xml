@@ -35,6 +35,8 @@
     <string name="score">Score:</string>
     <string name="_0">0</string>
     <string name="highscores">Hishgscores</string>
+    <string name="sign_up_login">Sign up</string>
+    <string name="sign_in_login">Sign in</string>
 
 
 </resources>
