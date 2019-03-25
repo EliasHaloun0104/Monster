@@ -36,7 +36,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
 
-
+    private Button reset;
     private FirebaseAuth mAuth;
     private DatabaseReference rootRef;
     private DatabaseReference userRef;
@@ -53,7 +53,7 @@ public class SignInActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
 
-
+        reset = findViewById(R.id.reset);
         signInEmail = findViewById(R.id.signIn_email);
         signInPassword = findViewById(R.id.signIn_password);
         signInBtn = findViewById(R.id.signIn_signIn);
@@ -61,6 +61,14 @@ public class SignInActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Login");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(SignInActivity.this, ForgetPassword.class);
+                startActivity(in);
+            }
+        });
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override

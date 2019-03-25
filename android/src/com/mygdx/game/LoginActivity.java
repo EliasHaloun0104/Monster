@@ -81,6 +81,7 @@ public class LoginActivity extends Activity {
         signUpBtn = findViewById(R.id.login_signUp);
         mAuth = FirebaseAuth.getInstance();
 
+
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
