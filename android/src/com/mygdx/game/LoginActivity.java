@@ -40,7 +40,12 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends Activity {
 
@@ -55,11 +60,16 @@ public class LoginActivity extends Activity {
     private Button signUpBtn;
 
 
+    private ApiInterface apiInterface;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
         faceLog = findViewById(R.id.facelog);
         loginBg = findViewById(R.id.login_bg);
@@ -130,6 +140,8 @@ public class LoginActivity extends Activity {
                     String last_name = object.getString("last_name");
 
 
+                    isInDatabase(first_name + " " + last_name);
+
                     //Firebase
                     handleFacebookAccessToken(accessToken, first_name, last_name);
 
@@ -176,6 +188,71 @@ public class LoginActivity extends Activity {
 
 
                 });
+    }
+
+    //check if the user exists in database and if it doesnt call necessary method to add
+    private void isInDatabase(final String username) {
+        Call<List<HighScore>> usernameCall = apiInterface.getUsername(username);
+        usernameCall.enqueue(new Callback<List<HighScore>>() {
+
+            @Override
+            public void onResponse(@NonNull Call<List<HighScore>> call, @NonNull Response<List<HighScore>> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+                    try {
+                        response.body().get(0).getUsername();
+                    } catch (IndexOutOfBoundsException ex) {
+                        addInitialScore(username);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<HighScore>> call, @NonNull Throwable t) {
+                Toast.makeText(HighScoresActivity.this,
+                        t.getLocalizedMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+
+
+        });
+    }
+
+    //used to add the initial score 0 to db...
+    private void addInitialScore(String username) {
+
+        Call<HighScore> highScoreCall = apiInterface.addInitial(username, 0);
+
+        highScoreCall.enqueue(new Callback<HighScore>() {
+            @Override
+            public void onResponse(@NonNull Call<HighScore> call, @NonNull Response<HighScore> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    boolean success = response.body().isSuccess();
+                    if (success) {
+//                            Toast.makeText(HighScoresActivity.this,
+//                                    response.body().getMessage(),
+//                                    Toast.LENGTH_SHORT).show();
+                        //finish();
+                        System.out.println("SUCCESS");
+                    } else {
+//                            Toast.makeText(HighScoresActivity.this,
+//                                    response.body().getMessage(),
+//                                    Toast.LENGTH_SHORT).show();
+                        //finish();
+                        System.out.println("FAILED");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<HighScore> call, @NonNull Throwable t) {
+                Toast.makeText(HighScoresActivity.this,
+                        t.getLocalizedMessage(),
+                        Toast.LENGTH_SHORT).show();
+                System.out.println("FAILED 2");
+            }
+        });
     }
 
 }
