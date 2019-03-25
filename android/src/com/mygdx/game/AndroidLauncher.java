@@ -176,4 +176,23 @@ public class AndroidLauncher extends Activity {
         }
     }
 
+    private void getUserName() {
+
+        final DatabaseReference sqldb = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getUid()).child("name");
+        sqldb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String userName = dataSnapshot.getValue().toString();
+
+                System.out.println("User name: " + userName);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }
