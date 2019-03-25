@@ -131,6 +131,7 @@ public class Play implements Screen {
     public void dispose() {
         screen.dispose();
         background.dispose();
+        music.stop();
         music.dispose();
     }
 

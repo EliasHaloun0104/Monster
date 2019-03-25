@@ -2,6 +2,8 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.main.MainGame;
+
 
 import static com.mygdx.game.main.Constant.BLOCK_SIZE;
 
@@ -43,6 +45,10 @@ public class EndGame implements Screen {
 
         screen.stage.act();
         screen.stage.draw();
+        if(screen.backButton()){
+            MainGame.getInstance().setScreen(new LevelMap());
+            dispose();
+        }
 
     }
 

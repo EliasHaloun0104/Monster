@@ -75,6 +75,11 @@ public class LevelMap implements Screen {
         screen.stage.act();
         screen.stage.draw();
 
+        if(screen.backButton()){
+            Gdx.app.exit();
+            dispose();
+        }
+
     }
 
     @Override
@@ -99,6 +104,7 @@ public class LevelMap implements Screen {
 
     @Override
     public void dispose() {
+        music.stop();
         music.dispose();
     }
 }
