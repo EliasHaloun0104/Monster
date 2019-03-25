@@ -13,6 +13,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class UsersFragment extends Fragment {
     private DatabaseReference databaseReference;
     private FirebaseUser currentUser;
     private DatabaseReference roleRef;
+    private DatabaseReference userDatabase;
 
     private View view;
 
@@ -49,6 +51,7 @@ public class UsersFragment extends Fragment {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         roleRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUser.getUid()).child("role");
 
+        userDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
         usersList = view.findViewById(R.id.usersList_frag);
         usersList.setHasFixedSize(true);
@@ -163,6 +166,22 @@ public class UsersFragment extends Fragment {
 
                         }
                     });
+                    //
+                    userDatabase.child(userId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            if (dataSnapshot.hasChild("online")) {
+                                String userOnline = dataSnapshot.child("online").getValue().toString();
+                                viewHolder.setUserOnline(userOnline);
+
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+                    //
                 } else {
                     // set height to null
                     viewHolder.setLayout();
@@ -198,6 +217,17 @@ public class UsersFragment extends Fragment {
             RelativeLayout rl = view.findViewById(R.id.user_single_);
             rl.getLayoutParams().height = 0;
             rl.getLayoutParams().width = 0;
+
+        }
+        public void setUserOnline(String onlineStatus) {
+            ImageView onlineImage = view.findViewById(R.id.user_single_onoff);
+
+            if (onlineStatus.equals("true")) {
+                onlineImage.setVisibility(View.VISIBLE);
+            } else {
+                onlineImage.setVisibility(View.INVISIBLE);
+
+            }
 
         }
     }

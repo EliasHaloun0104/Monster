@@ -12,19 +12,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AdminsFragment extends Fragment {
 
     private RecyclerView adminList;
     private DatabaseReference databaseReference;
+    private DatabaseReference userDatabase;
     private FirebaseUser currentUser;
 
     private View view;
@@ -40,6 +45,9 @@ public class AdminsFragment extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
         databaseReference.keepSynced(true);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        userDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+
 
         adminList = view.findViewById(R.id.adminList_frag);
         adminList.setHasFixedSize(true);
@@ -79,6 +87,24 @@ public class AdminsFragment extends Fragment {
                             }
                         }
                     });
+
+                    //
+                    userDatabase.child(userId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            if (dataSnapshot.hasChild("online")) {
+                                String userOnline = dataSnapshot.child("online").getValue().toString();
+                                viewHolder.setUserOnline(userOnline);
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+                    //
                 } else {
                     // set height to null
                     viewHolder.setLayout();
@@ -114,6 +140,18 @@ public class AdminsFragment extends Fragment {
             RelativeLayout rl = view.findViewById(R.id.user_single_);
             rl.getLayoutParams().height = 0;
             rl.getLayoutParams().width = 0;
+
+        }
+
+        public void setUserOnline(String onlineStatus) {
+            ImageView onlineImage = view.findViewById(R.id.user_single_onoff);
+
+            if (onlineStatus.equals("true")) {
+                onlineImage.setVisibility(View.VISIBLE);
+            } else {
+                onlineImage.setVisibility(View.INVISIBLE);
+
+            }
 
         }
     }
