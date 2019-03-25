@@ -50,6 +50,7 @@ import retrofit2.Response;
 public class LoginActivity extends Activity {
 
     private ImageView loginBg;
+    private ImageView logo;
     private LoginButton faceLog;
     private CallbackManager callbackManager;
     private FirebaseAuth mAuth;
@@ -73,6 +74,7 @@ public class LoginActivity extends Activity {
 
         faceLog = findViewById(R.id.facelog);
         loginBg = findViewById(R.id.login_bg);
+        logo = findViewById(R.id.login_logo);
 
 
         signInBtn = findViewById(R.id.login_signInBtn);
