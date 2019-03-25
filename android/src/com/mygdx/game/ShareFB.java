@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.ShareOpenGraphAction;
 import com.facebook.share.model.ShareOpenGraphContent;
@@ -28,40 +30,32 @@ public class ShareFB extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-
         shareDialog = new ShareDialog(this);
 
         share();
 
 
     }
+    private int fetchScorefromLibGDX() {
 
+        String score = " ";
+        try {
+            Preferences prefs = Gdx.app.getPreferences("prefs");
+            score = prefs.getString("score", "No name stored");
+            if(!score.equals("No name stored")) {
+                return Integer.parseInt(score);
+            }
+        } catch (NullPointerException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
     public void share(){
-        /*Bitmap image = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
-        SharePhoto photo = new SharePhoto.Builder()
-                .setBitmap(image)
-                .build();
-        if (ShareDialog.canShow(ShareLinkContent.class)) {
-            SharePhotoContent content = new SharePhotoContent.Builder()
-                    .addPhoto(photo)
-                    .setRef("scawca"+1231)
-                    .build();
 
-            ShareLinkContent content2 = new ShareLinkContent.Builder()
-                    .setContentUrl(Uri.parse("https://firebasestorage.googleapis.com/v0/b/monsterapp-6ba0b.appspot.com" +
-                            "/o/ic_launcher.png?alt=media&token=f64cb433-80f4-4340-88c3-190b4879a5fd"))
-                    .setQuote("Hello Guys"+15)
-                    .build();
-            // for multimedia
-            *//*ShareContent shareContent = new ShareMediaContent.Builder()
-                    .addMedium(photo)
-                    .addMedium(content2)
-                    .build();*//*
-
-        }*/
+        String score = String.valueOf(fetchScorefromLibGDX());
         ShareOpenGraphObject object = new ShareOpenGraphObject.Builder()
                 .putString("og:type", "game.achievement")
-                .putString("og:title", "MONSTER\nMy highest score is "+ " HERE ")
+                .putString("og:title", "MONSTER\nMy highest score is "+  " " + score)
                 .build();
 
 
@@ -83,6 +77,5 @@ public class ShareFB extends AppCompatActivity {
         }
 
     }
-
 
 }
