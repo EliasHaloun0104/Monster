@@ -70,6 +70,7 @@ public class HighScoresActivity extends AppCompatActivity {
 //        isInDatabase("nuno@hkr.se");
 //        isInDatabase("tomates@hkr.se");
 //        isHighScore("tomates@hkr.se", 5000);
+        getHighScore("nils@hkr.se");
 
     }
 
@@ -251,6 +252,38 @@ public class HighScoresActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    private void getHighScore(final String username) {
+
+        Call<List<HighScore>> highScoreCall = apiInterface.getScore(username);
+
+        highScoreCall.enqueue(new Callback<List<HighScore>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<HighScore>> call, @NonNull Response<List<HighScore>> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+                    int score = response.body().get(0).getScore();
+                    System.out.println(String.valueOf(score).toUpperCase());
+
+                    Toast.makeText(HighScoresActivity.this,
+                            "got highscore",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+
+                    Toast.makeText(HighScoresActivity.this,
+                            "didn't get highscore",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<HighScore>> call, @NonNull Throwable t) {
+                Toast.makeText(HighScoresActivity.this,
+                        t.getLocalizedMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 }

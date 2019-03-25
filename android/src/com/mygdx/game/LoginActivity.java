@@ -10,6 +10,7 @@ import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,9 +44,8 @@ import java.util.Objects;
 
 public class LoginActivity extends Activity {
 
-    private Button login;
+    private ImageView loginBg;
     private LoginButton faceLog;
-    private TextView staus;
     private CallbackManager callbackManager;
     private FirebaseAuth mAuth;
     //Database
@@ -61,9 +61,8 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
 
-        login = findViewById(R.id.loginButton);
         faceLog = findViewById(R.id.facelog);
-        staus = findViewById(R.id.status);
+        loginBg = findViewById(R.id.login_bg);
 
 
         signInBtn = findViewById(R.id.login_signInBtn);
@@ -73,7 +72,7 @@ public class LoginActivity extends Activity {
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signInIntent = new Intent(LoginActivity.this,SignInActivity.class);
+                Intent signInIntent = new Intent(LoginActivity.this, SignInActivity.class);
                 startActivity(signInIntent);
 
             }
@@ -82,32 +81,13 @@ public class LoginActivity extends Activity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signUpIntent = new Intent(LoginActivity.this,SignUpActivity.class);
+                Intent signUpIntent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(signUpIntent);
 
             }
         });
-        /*
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("prefs", MODE_PRIVATE);
-        final SharedPreferences.Editor editor = pref.edit();
 
-
-        //for now if the users presses login just login and save login.....
-        login.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-//                System.out.println("login pressed");
-                editor.putString("username", "nuno");
-                editor.apply();
-
-                Intent intent = new Intent(v.getContext(), AndroidLauncher.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        */
-        faceLog.setReadPermissions(Arrays.asList("email","public_profile"));
+        faceLog.setReadPermissions(Arrays.asList("email", "public_profile"));
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -130,13 +110,14 @@ public class LoginActivity extends Activity {
         });
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void getUserprofile(final AccessToken accessToken){
+    public void getUserprofile(final AccessToken accessToken) {
 
         GraphRequest graphRequest = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
             @Override
@@ -147,11 +128,10 @@ public class LoginActivity extends Activity {
                     // get the user information
                     String first_name = object.getString("first_name");
                     String last_name = object.getString("last_name");
-                    String email = object.getString("email");
-                    String id = object.getString("id");
+
 
                     //Firebase
-                    handleFacebookAccessToken(accessToken,first_name,last_name);
+                    handleFacebookAccessToken(accessToken, first_name, last_name);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -162,11 +142,12 @@ public class LoginActivity extends Activity {
         });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields","first_name,last_name,email,id");
+        parameters.putString("fields", "first_name,last_name,email,id");
         graphRequest.setParameters(parameters);
         graphRequest.executeAsync();
 
     }
+
     private void handleFacebookAccessToken(AccessToken token, final String first_name, final String last_name) {
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
@@ -183,7 +164,7 @@ public class LoginActivity extends Activity {
                             database = FirebaseDatabase.getInstance();
                             databaseReference = database.getReference().child("Users").child(uid);
                             HashMap<String, String> userMap = new HashMap<>();
-                            userMap.put("name", first_name+" "+last_name);
+                            userMap.put("name", first_name + " " + last_name);
                             userMap.put("status", "Hi there, I'm using HKR Monsters App.");
                             userMap.put("role", "user");
                             databaseReference.setValue(userMap);
