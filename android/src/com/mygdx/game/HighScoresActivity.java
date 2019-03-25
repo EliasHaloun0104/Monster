@@ -102,6 +102,8 @@ public class HighScoresActivity extends AppCompatActivity {
                     highscore8.setText(String.valueOf(highscores.get(8).getScore()));
                     username9.setText(highscores.get(9).getUsername());
                     highscore9.setText(String.valueOf(highscores.get(9).getScore()));
+
+                    System.out.println("DONE");
                 }
             }
 
@@ -118,172 +120,172 @@ public class HighScoresActivity extends AppCompatActivity {
     //the below methods need to be moved to the appropriate classes.....
 
     //check if the user exists in database and if it doesnt call necessary method to add
-    private void isInDatabase(final String username) {
-        Call<List<HighScore>> usernameCall = apiInterface.getUsername(username);
-        usernameCall.enqueue(new Callback<List<HighScore>>() {
-
-            @Override
-            public void onResponse(@NonNull Call<List<HighScore>> call, @NonNull Response<List<HighScore>> response) {
-
-                if (response.isSuccessful() && response.body() != null) {
-                    try {
-                        response.body().get(0).getUsername();
-                    } catch (IndexOutOfBoundsException ex) {
-                        addInitialScore(username);
-                    }
-
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<HighScore>> call, @NonNull Throwable t) {
-                Toast.makeText(HighScoresActivity.this,
-                        t.getLocalizedMessage(),
-                        Toast.LENGTH_SHORT).show();
-            }
-
-
-        });
-    }
+//    private void isInDatabase(final String username) {
+//        Call<List<HighScore>> usernameCall = apiInterface.getUsername(username);
+//        usernameCall.enqueue(new Callback<List<HighScore>>() {
+//
+//            @Override
+//            public void onResponse(@NonNull Call<List<HighScore>> call, @NonNull Response<List<HighScore>> response) {
+//
+//                if (response.isSuccessful() && response.body() != null) {
+//                    try {
+//                        response.body().get(0).getUsername();
+//                    } catch (IndexOutOfBoundsException ex) {
+//                        addInitialScore(username);
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<List<HighScore>> call, @NonNull Throwable t) {
+//                Toast.makeText(HighScoresActivity.this,
+//                        t.getLocalizedMessage(),
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//
+//
+//        });
+//    }
 
     //used to add the initial score 0 to db...
-    private void addInitialScore(String username) {
-
-        Call<HighScore> highScoreCall = apiInterface.addInitial(username, 0);
-
-        highScoreCall.enqueue(new Callback<HighScore>() {
-            @Override
-            public void onResponse(@NonNull Call<HighScore> call, @NonNull Response<HighScore> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    boolean success = response.body().isSuccess();
-                    if (success) {
-//                            Toast.makeText(HighScoresActivity.this,
-//                                    response.body().getMessage(),
-//                                    Toast.LENGTH_SHORT).show();
-                        //finish();
-                        System.out.println("SUCCESS");
-                    } else {
-//                            Toast.makeText(HighScoresActivity.this,
-//                                    response.body().getMessage(),
-//                                    Toast.LENGTH_SHORT).show();
-                        //finish();
-                        System.out.println("FAILED");
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<HighScore> call, @NonNull Throwable t) {
-                Toast.makeText(HighScoresActivity.this,
-                        t.getLocalizedMessage(),
-                        Toast.LENGTH_SHORT).show();
-                System.out.println("FAILED 2");
-            }
-        });
-    }
+//    private void addInitialScore(String username) {
+//
+//        Call<HighScore> highScoreCall = apiInterface.addInitial(username, 0);
+//
+//        highScoreCall.enqueue(new Callback<HighScore>() {
+//            @Override
+//            public void onResponse(@NonNull Call<HighScore> call, @NonNull Response<HighScore> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    boolean success = response.body().isSuccess();
+//                    if (success) {
+////                            Toast.makeText(HighScoresActivity.this,
+////                                    response.body().getMessage(),
+////                                    Toast.LENGTH_SHORT).show();
+//                        //finish();
+//                        System.out.println("SUCCESS");
+//                    } else {
+////                            Toast.makeText(HighScoresActivity.this,
+////                                    response.body().getMessage(),
+////                                    Toast.LENGTH_SHORT).show();
+//                        //finish();
+//                        System.out.println("FAILED");
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<HighScore> call, @NonNull Throwable t) {
+//                Toast.makeText(HighScoresActivity.this,
+//                        t.getLocalizedMessage(),
+//                        Toast.LENGTH_SHORT).show();
+//                System.out.println("FAILED 2");
+//            }
+//        });
+//    }
 
     //check if score is highscore and if so call method to update highscore
-    private void isHighScore(final String username, final int score) {
-
-        Call<List<HighScore>> highScoreCall = apiInterface.getScore(username);
-
-        highScoreCall.enqueue(new Callback<List<HighScore>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<HighScore>> call, @NonNull Response<List<HighScore>> response) {
-
-                if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().get(0).getScore() < score) {
-                        updateHighScore(username, score);
-
-                        Toast.makeText(HighScoresActivity.this,
-                                "update highscore",
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-
-                        Toast.makeText(HighScoresActivity.this,
-                                "dont update highscore",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<HighScore>> call, @NonNull Throwable t) {
-                Toast.makeText(HighScoresActivity.this,
-                        t.getLocalizedMessage(),
-                        Toast.LENGTH_SHORT).show();
-            }
-
-        });
-    }
+//    private void isHighScore(final String username, final int score) {
+//
+//        Call<List<HighScore>> highScoreCall = apiInterface.getScore(username);
+//
+//        highScoreCall.enqueue(new Callback<List<HighScore>>() {
+//            @Override
+//            public void onResponse(@NonNull Call<List<HighScore>> call, @NonNull Response<List<HighScore>> response) {
+//
+//                if (response.isSuccessful() && response.body() != null) {
+//                    if (response.body().get(0).getScore() < score) {
+//                        updateHighScore(username, score);
+//
+//                        Toast.makeText(HighScoresActivity.this,
+//                                "update highscore",
+//                                Toast.LENGTH_SHORT).show();
+//                    } else {
+//
+//                        Toast.makeText(HighScoresActivity.this,
+//                                "dont update highscore",
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<List<HighScore>> call, @NonNull Throwable t) {
+//                Toast.makeText(HighScoresActivity.this,
+//                        t.getLocalizedMessage(),
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//
+//        });
+//    }
 
     //updates highscore
-    private void updateHighScore(String username, int score) {
+//    private void updateHighScore(String username, int score) {
+//
+//        Call<HighScore> highScoreCall = apiInterface.updateHighScore(username, score);
+//
+//        highScoreCall.enqueue(new Callback<HighScore>() {
+//            @Override
+//            public void onResponse(@NonNull Call<HighScore> call, @NonNull Response<HighScore> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    boolean success = response.body().isSuccess();
+//                    if (success) {
+////                            Toast.makeText(HighScoresActivity.this,
+////                                    response.body().getMessage(),
+////                                    Toast.LENGTH_SHORT).show();
+//                        //finish();
+//                        System.out.println("SUCCESS");
+//                    } else {
+////                            Toast.makeText(HighScoresActivity.this,
+////                                    response.body().getMessage(),
+////                                    Toast.LENGTH_SHORT).show();
+//                        //finish();
+//                        System.out.println("FAILED");
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<HighScore> call, @NonNull Throwable t) {
+//                Toast.makeText(HighScoresActivity.this,
+//                        t.getLocalizedMessage(),
+//                        Toast.LENGTH_SHORT).show();
+//                System.out.println("FAILED 2");
+//            }
+//        });
+//
+//    }
 
-        Call<HighScore> highScoreCall = apiInterface.updateHighScore(username, score);
-
-        highScoreCall.enqueue(new Callback<HighScore>() {
-            @Override
-            public void onResponse(@NonNull Call<HighScore> call, @NonNull Response<HighScore> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    boolean success = response.body().isSuccess();
-                    if (success) {
-//                            Toast.makeText(HighScoresActivity.this,
-//                                    response.body().getMessage(),
-//                                    Toast.LENGTH_SHORT).show();
-                        //finish();
-                        System.out.println("SUCCESS");
-                    } else {
-//                            Toast.makeText(HighScoresActivity.this,
-//                                    response.body().getMessage(),
-//                                    Toast.LENGTH_SHORT).show();
-                        //finish();
-                        System.out.println("FAILED");
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<HighScore> call, @NonNull Throwable t) {
-                Toast.makeText(HighScoresActivity.this,
-                        t.getLocalizedMessage(),
-                        Toast.LENGTH_SHORT).show();
-                System.out.println("FAILED 2");
-            }
-        });
-
-    }
-
-    private void getHighScore(final String username) {
-
-        Call<List<HighScore>> highScoreCall = apiInterface.getScore(username);
-
-        highScoreCall.enqueue(new Callback<List<HighScore>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<HighScore>> call, @NonNull Response<List<HighScore>> response) {
-
-                if (response.isSuccessful() && response.body() != null) {
-                    int score = response.body().get(0).getScore();
-                    System.out.println(String.valueOf(score).toUpperCase());
-
-                    Toast.makeText(HighScoresActivity.this,
-                            "got highscore",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-
-                    Toast.makeText(HighScoresActivity.this,
-                            "didn't get highscore",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<HighScore>> call, @NonNull Throwable t) {
-                Toast.makeText(HighScoresActivity.this,
-                        t.getLocalizedMessage(),
-                        Toast.LENGTH_SHORT).show();
-            }
-
-        });
-    }
+//    private void getHighScore(final String username) {
+//
+//        Call<List<HighScore>> highScoreCall = apiInterface.getScore(username);
+//
+//        highScoreCall.enqueue(new Callback<List<HighScore>>() {
+//            @Override
+//            public void onResponse(@NonNull Call<List<HighScore>> call, @NonNull Response<List<HighScore>> response) {
+//
+//                if (response.isSuccessful() && response.body() != null) {
+//                    int score = response.body().get(0).getScore();
+//                    System.out.println(String.valueOf(score).toUpperCase());
+//
+//                    Toast.makeText(HighScoresActivity.this,
+//                            "got highscore",
+//                            Toast.LENGTH_SHORT).show();
+//                } else {
+//
+//                    Toast.makeText(HighScoresActivity.this,
+//                            "didn't get highscore",
+//                            Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<List<HighScore>> call, @NonNull Throwable t) {
+//                Toast.makeText(HighScoresActivity.this,
+//                        t.getLocalizedMessage(),
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//
+//        });
+//    }
 }

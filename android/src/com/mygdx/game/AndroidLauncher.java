@@ -261,9 +261,9 @@ public class AndroidLauncher extends Activity {
 //                                Toast.LENGTH_SHORT).show();
                     } else {
 
-                        Toast.makeText(AndroidLauncher.this,
-                                "dont update highscore",
-                                Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(AndroidLauncher.this,
+//                                "dont update highscore",
+//                                Toast.LENGTH_SHORT).show();
                     }
                 }
             }
