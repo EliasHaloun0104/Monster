@@ -70,7 +70,7 @@ public class HighScoresActivity extends AppCompatActivity {
 //        isInDatabase("nuno@hkr.se");
 //        isInDatabase("tomates@hkr.se");
 //        isHighScore("tomates@hkr.se", 5000);
-        getHighScore("nils@hkr.se");
+//        getHighScore("nils@hkr.se");
 
     }
 

@@ -24,6 +24,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -33,6 +38,8 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputLayout regUserName;
 
     private Toolbar toolbar;
+
+    private ApiInterface apiInterface;
 
     //Database
     private FirebaseDatabase database;
@@ -44,10 +51,14 @@ public class SignUpActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
         //Firebase
         mAuth = FirebaseAuth.getInstance();
@@ -79,6 +90,8 @@ public class SignUpActivity extends AppCompatActivity {
                     progressDialog.show();
                     registerUser(display_string, email_string, password_string);
 
+
+                    isInDatabase(display_string);
                 }
             }
         });
@@ -124,5 +137,70 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //check if the user exists in database and if it doesnt call necessary method to add
+    private void isInDatabase(final String username) {
+        Call<List<HighScore>> usernameCall = apiInterface.getUsername(username);
+        usernameCall.enqueue(new Callback<List<HighScore>>() {
+
+            @Override
+            public void onResponse(@NonNull Call<List<HighScore>> call, @NonNull Response<List<HighScore>> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+                    try {
+                        response.body().get(0).getUsername();
+                    } catch (IndexOutOfBoundsException ex) {
+                        addInitialScore(username);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<HighScore>> call, @NonNull Throwable t) {
+                Toast.makeText(SignUpActivity.this,
+                        t.getLocalizedMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+
+
+        });
+    }
+
+    //used to add the initial score 0 to db...
+    private void addInitialScore(String username) {
+
+        Call<HighScore> highScoreCall = apiInterface.addInitial(username, 0);
+
+        highScoreCall.enqueue(new Callback<HighScore>() {
+            @Override
+            public void onResponse(@NonNull Call<HighScore> call, @NonNull Response<HighScore> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    boolean success = response.body().isSuccess();
+                    if (success) {
+//                            Toast.makeText(HighScoresActivity.this,
+//                                    response.body().getMessage(),
+//                                    Toast.LENGTH_SHORT).show();
+                        //finish();
+                        System.out.println("SUCCESS");
+                    } else {
+//                            Toast.makeText(HighScoresActivity.this,
+//                                    response.body().getMessage(),
+//                                    Toast.LENGTH_SHORT).show();
+                        //finish();
+                        System.out.println("FAILED");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<HighScore> call, @NonNull Throwable t) {
+                Toast.makeText(SignUpActivity.this,
+                        t.getLocalizedMessage(),
+                        Toast.LENGTH_SHORT).show();
+                System.out.println("FAILED 2");
+            }
+        });
     }
 }
