@@ -210,7 +210,7 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onFailure(@NonNull Call<List<HighScore>> call, @NonNull Throwable t) {
-                Toast.makeText(HighScoresActivity.this,
+                Toast.makeText(LoginActivity.this,
                         t.getLocalizedMessage(),
                         Toast.LENGTH_SHORT).show();
             }
@@ -247,7 +247,7 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onFailure(@NonNull Call<HighScore> call, @NonNull Throwable t) {
-                Toast.makeText(HighScoresActivity.this,
+                Toast.makeText(LoginActivity.this,
                         t.getLocalizedMessage(),
                         Toast.LENGTH_SHORT).show();
                 System.out.println("FAILED 2");
