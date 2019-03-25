@@ -43,4 +43,11 @@ public interface ApiInterface {
     Call<List<HighScore>> getScore(
             @Field("username") String username
     );
+
+    @FormUrlEncoded
+    @POST("getHighScore.php")
+        //returns the score (used to check if user's high score needs to be updated in db
+    Call<List<HighScore>> getHighScore(
+            @Field("username") String username
+    );
 }
