@@ -37,6 +37,7 @@
     <string name="highscores">Hishgscores</string>
     <string name="sign_up_login">Sign up</string>
     <string name="sign_in_login">Sign in</string>
+    <string name="score_change">Score</string>
 
 
 </resources>
