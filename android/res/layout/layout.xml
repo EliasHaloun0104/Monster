@@ -100,8 +100,9 @@
         style="@style/com_facebook_button_share"
         android:layout_width="120dp"
         android:layout_height="28dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@id/signOutBtn" />
+        android:layout_below="@+id/highscoresButton"
+        android:layout_toEndOf="@id/signOutBtn" />
 
 </RelativeLayout>
