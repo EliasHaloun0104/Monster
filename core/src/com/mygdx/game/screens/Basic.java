@@ -38,6 +38,12 @@ public class Basic {
 
     }
 
+    public void render2ndColor(){
+        Gdx.gl.glClearColor(192f/255, 114f/255, 114f/255, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        viewManager.apply(batch, stage);
+    }
+
     public Assets getAssets() {
         return assets;
     }

@@ -30,8 +30,9 @@ public class LevelMap implements Screen {
         // TODO get the score to decide number of opened level
         int score = 0;
         Preferences prefs = Gdx.app.getPreferences("prefs");
-        prefs.getString("score", "0");
+        score = Integer.parseInt(prefs.getString("score", "0"));
         prefs.flush();
+
 
         openedLevel = score/1000 + 1 ;
 
@@ -43,7 +44,12 @@ public class LevelMap implements Screen {
         Button btn;
         for (int i = 0; i < numberOfLevel ; i++) {
             final int iExtra = i+1;
-            btn = new Button("block", -1, screen.assets);
+            if(iExtra<=openedLevel){
+                btn = new Button("block", -1, screen.assets);
+            }else{
+                btn = new Button("blockEnemy", -1, screen.assets);
+            }
+
             btn.getBtn().setPosition((1 + i*3)*BLOCK_SIZE, 4*BLOCK_SIZE);
             btn.getBtn().setHeight(BLOCK_SIZE*2);
             btn.getBtn().setWidth(BLOCK_SIZE*2);
@@ -53,6 +59,7 @@ public class LevelMap implements Screen {
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         MainGame.getInstance().setScreen(new Play(iExtra));
+                        dispose();
                         return false;
                     }
                 });
@@ -69,7 +76,7 @@ public class LevelMap implements Screen {
 
     @Override
     public void render(float delta) {
-        screen.render();
+        screen.render2ndColor();
 
         screen.batch.begin();
         screen.batch.draw(background,0,0);
@@ -112,5 +119,6 @@ public class LevelMap implements Screen {
     public void dispose() {
         music.stop();
         music.dispose();
+        screen.dispose();
     }
 }

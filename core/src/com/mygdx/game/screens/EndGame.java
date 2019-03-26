@@ -45,7 +45,7 @@ public class EndGame implements Screen {
 
     @Override
     public void render(float delta) {
-        screen.render();
+        screen.render2ndColor();
 
         screen.batch.begin();
         screen.batch.draw(background,0,0);
