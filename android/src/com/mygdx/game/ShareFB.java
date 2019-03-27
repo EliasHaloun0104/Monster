@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,30 +13,71 @@ import android.widget.Button;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareHashtag;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.ShareOpenGraphAction;
 import com.facebook.share.model.ShareOpenGraphContent;
 import com.facebook.share.model.ShareOpenGraphObject;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
+
+import retrofit2.Response;
 
 
 public class ShareFB extends AppCompatActivity {
 
     private ShareDialog shareDialog;
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
 
-        share();
+        //share();
+        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+            @Override
+            public void onSuccess(Sharer.Result result) {
 
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+
+        if (ShareDialog.canShow(ShareLinkContent.class)) {
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setContentUrl(Uri.parse("https://monster-game-db.000webhostapp.com/monster.png"))
+                    .setQuote("I just played Monsters. My score was: " + String.valueOf(fetchScorefromLibGDX()))
+                    .build();
+
+            shareDialog.show(linkContent);
+        }
 
     }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+
     private int fetchScorefromLibGDX() {
 
         String score = " ";
@@ -77,5 +119,6 @@ public class ShareFB extends AppCompatActivity {
         }
 
     }
+
 
 }
