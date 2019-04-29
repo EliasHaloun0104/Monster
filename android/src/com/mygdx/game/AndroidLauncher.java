@@ -46,6 +46,7 @@ public class AndroidLauncher extends AppCompatActivity {
     private Button signOutButton;
     private Button shareButton;
     private Button highscoresButton;
+    private Button screenTimeButton;
     private LoginManager loginManager;
 
     private ApiInterface apiInterface;
@@ -89,6 +90,7 @@ public class AndroidLauncher extends AppCompatActivity {
         signOutButton = findViewById(R.id.signOutBtn);
         shareButton = findViewById(R.id.sharebtn);
         highscoresButton = findViewById(R.id.highscoresButton);
+        screenTimeButton = findViewById(R.id.screenTimeButton);
 
 
         playButton.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +144,14 @@ public class AndroidLauncher extends AppCompatActivity {
                             "No connection",
                             Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        screenTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AndroidLauncher.this,ScreenTimeActivity.class);
+                startActivity(intent);
+
             }
         });
 

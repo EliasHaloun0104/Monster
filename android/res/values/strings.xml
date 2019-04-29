@@ -40,6 +40,7 @@
     <string name="score_change">Score</string>
     <string name="highscores_txt">HIGHSCORES</string>
     <string name="forget_password">Forget password</string>
+    <string name="screen_time">Screen Time</string>
 
 
 </resources>

@@ -104,5 +104,22 @@
         android:layout_marginTop="5dp"
         android:layout_below="@+id/highscoresButton"
         android:layout_toEndOf="@id/signOutBtn" />
+    <Button
+        android:id="@+id/screenTimeButton"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_above="@id/sharebtn"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/signOutBtn"
+        android:background="@drawable/button_border"
+        android:elevation="5dp"
+        android:padding="5dp"
+        android:stateListAnimator="@null"
+        android:text="@string/screen_time"
+        android:textColor="#ffff"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:translationZ="5dp" />
 
 </RelativeLayout>
