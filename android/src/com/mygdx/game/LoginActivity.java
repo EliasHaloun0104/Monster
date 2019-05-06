@@ -38,7 +38,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -60,6 +62,15 @@ public class LoginActivity extends Activity {
     private Button signInBtn;
     private Button signUpBtn;
 
+    // timer and SQLite database
+    DatabaseHelper myDb;
+    private long startTime;
+    private long endTime;
+    private Date currentDate;
+
+    SimpleDateFormat simpleTimeFormat;
+    SimpleDateFormat simpleDateFormat;
+
 
     private ApiInterface apiInterface;
 
@@ -69,6 +80,12 @@ public class LoginActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+
+        myDb = new DatabaseHelper(this);
+        simpleTimeFormat = new SimpleDateFormat("HH:mm:ss");
+
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        currentDate = new Date(System.currentTimeMillis());
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
@@ -257,5 +274,23 @@ public class LoginActivity extends Activity {
             }
         });
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        startTime = System.currentTimeMillis();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        endTime = System.currentTimeMillis();
+        long diff = endTime - startTime;
+        String theDate = simpleDateFormat.format(currentDate);
+        TheTimer theTimer = new TheTimer(theDate, diff);
+    }
+
 
 }
