@@ -31,6 +31,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -58,12 +60,25 @@ public class AndroidLauncher extends AppCompatActivity {
     private InternetConnection connection = new InternetConnection();
     UserDetailsSingleton user = UserDetailsSingleton.getInstance();
 
+    // timer and SQLite database
+    DatabaseHelper myDb;
+    private long startTime;
+    private long endTime;
+    private Date currentDate;
+
+    SimpleDateFormat simpleTimeFormat;
+    SimpleDateFormat simpleDateFormat;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
+        myDb = new DatabaseHelper(this);
+        simpleTimeFormat = new SimpleDateFormat("HH:mm:ss");
 
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        currentDate = new Date(System.currentTimeMillis());
 
         /*
         if (connection.isOnline(getApplicationContext())) {
@@ -168,6 +183,7 @@ public class AndroidLauncher extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        startTime = System.currentTimeMillis();
 
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -317,5 +333,17 @@ public class AndroidLauncher extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        endTime = System.currentTimeMillis();
+        long diff = endTime - startTime;
+        String theDate = simpleDateFormat.format(currentDate);
+        TheTimer theTimer = new TheTimer(theDate, diff);
+
+        myDb.insetData(theTimer);
     }
 }
