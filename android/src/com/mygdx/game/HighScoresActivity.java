@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,10 +39,25 @@ public class HighScoresActivity extends AppCompatActivity {
     private TextView username9;
     private TextView highscore9;
 
+    // timer and SQLite database
+    DatabaseHelper myDb;
+    private long startTime;
+    private long endTime;
+    private Date currentDate;
+
+    SimpleDateFormat simpleTimeFormat;
+    SimpleDateFormat simpleDateFormat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.highscores_layout);
+
+        myDb = new DatabaseHelper(this);
+        simpleTimeFormat = new SimpleDateFormat("HH:mm:ss");
+
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        currentDate = new Date(System.currentTimeMillis());
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
@@ -288,4 +305,23 @@ public class HighScoresActivity extends AppCompatActivity {
 //
 //        });
 //    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        startTime = System.currentTimeMillis();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        endTime = System.currentTimeMillis();
+        long diff = endTime - startTime;
+        String theDate = simpleDateFormat.format(currentDate);
+        TheTimer theTimer = new TheTimer(theDate, diff);
+    }
 }
