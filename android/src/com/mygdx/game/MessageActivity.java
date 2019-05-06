@@ -24,7 +24,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,11 +57,26 @@ public class MessageActivity extends AppCompatActivity {
     private String lastKey = "";
     String lastPreviousKey = "";
 
+    // timer and SQLite database
+    DatabaseHelper myDb;
+    private long startTime;
+    private long endTime;
+    private Date currentDate;
+
+    SimpleDateFormat simpleTimeFormat;
+    SimpleDateFormat simpleDateFormat;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+
+        myDb = new DatabaseHelper(this);
+        simpleTimeFormat = new SimpleDateFormat("HH:mm:ss");
+
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        currentDate = new Date(System.currentTimeMillis());
 
         sendBtn = findViewById(R.id.message_send);
         theMessage = findViewById(R.id.message_message);
@@ -256,7 +273,23 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        startTime = System.currentTimeMillis();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        endTime = System.currentTimeMillis();
+        long diff = endTime - startTime;
+        String theDate = simpleDateFormat.format(currentDate);
+        TheTimer theTimer = new TheTimer(theDate, diff);
+    }
 
 
 }
