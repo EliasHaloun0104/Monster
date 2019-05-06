@@ -323,5 +323,6 @@ public class HighScoresActivity extends AppCompatActivity {
         long diff = endTime - startTime;
         String theDate = simpleDateFormat.format(currentDate);
         TheTimer theTimer = new TheTimer(theDate, diff);
+        myDb.insetData(theTimer);
     }
 }

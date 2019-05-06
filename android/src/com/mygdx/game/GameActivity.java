@@ -49,5 +49,6 @@ public class GameActivity extends AndroidApplication {
         long diff = endTime - startTime;
         String theDate = simpleDateFormat.format(currentDate);
         TheTimer theTimer = new TheTimer(theDate, diff);
+        myDb.insetData(theTimer);
     }
 }
