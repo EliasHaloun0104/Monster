@@ -20,7 +20,7 @@ public class ForgetPassword extends AppCompatActivity {
 
 
     private EditText editText ;
-    private Button   send;
+    private Button   sendButton;
     private FirebaseAuth firebaseAuth;
     private Toolbar toolbar;
 
@@ -45,14 +45,14 @@ public class ForgetPassword extends AppCompatActivity {
         currentDate = new Date(System.currentTimeMillis());
 
         editText = findViewById(R.id.email);
-        send = findViewById(R.id.button2);
+        sendButton = findViewById(R.id.button2);
         toolbar = findViewById(R.id.signIn_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Forget password");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         firebaseAuth = FirebaseAuth.getInstance();
             //send
-        send.setOnClickListener(new View.OnClickListener() {
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 firebaseAuth.sendPasswordResetEmail(editText.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
