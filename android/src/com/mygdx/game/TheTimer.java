@@ -15,15 +15,9 @@ public class TheTimer {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 
     public long getDuration() {
         return duration;
     }
 
-    public void setDuration(long duration) {
-        this.duration = duration;
-    }
 }
