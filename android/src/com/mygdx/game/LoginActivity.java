@@ -163,7 +163,7 @@ public class LoginActivity extends Activity {
                     isInDatabase(first_name + " " + last_name);
 
                     //Firebase
-                    handleFacebookAccessToken(accessToken, first_name, last_name);
+                    handleFacebookToken(accessToken, first_name, last_name);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -180,7 +180,7 @@ public class LoginActivity extends Activity {
 
     }
 
-    private void handleFacebookAccessToken(AccessToken token, final String first_name, final String last_name) {
+    private void handleFacebookToken(AccessToken token, final String first_name, final String last_name) {
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
