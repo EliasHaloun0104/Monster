@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="Screen Time Usage..."
+        android:text="@string/screen_time_usage"
         android:textColor="#fff"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:textStyle="italic" />
 
 
@@ -27,9 +27,9 @@
         android:layout_below="@id/screentime_title"
         android:layout_marginStart="10dp"
         android:layout_marginTop="100dp"
-        android:text="Today :"
+        android:text="@string/today"
         android:textColor="#fff"
-        android:textSize="28dp"
+        android:textSize="28sp"
         android:textStyle="bold" />
 
 
@@ -41,60 +41,36 @@
         android:layout_marginTop="104dp"
         android:layout_below="@id/screentime_title"
 
-        android:layout_marginStart="15dp"
-        android:layout_toEndOf="@id/screentime_yearly"
+        android:layout_marginStart="40dp"
+        android:layout_toEndOf="@id/screentime_monthly"
         android:text="00h : 00m : 00s"
         android:textColor="#fff"
-        android:textSize="24dp"
+        android:textSize="28sp"
          />
-    <TextView
-        android:id="@+id/screentime_7days"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/screentime_daily"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="45dp"
-        android:text="Last 7 days :"
-        android:textColor="#fff"
-        android:textSize="28dp"
-        android:textStyle="bold" />
-    <TextView
-        android:id="@+id/screentime_time7days"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/screentime_daily"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="50dp"
-        android:layout_toEndOf="@id/screentime_yearly"
-        android:text="00h : 00m : 00s"
-        android:textColor="#fff"
-        android:textSize="24dp"
-        />
-
-
     <TextView
         android:id="@+id/screentime_monthly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/screentime_7days"
+        android:layout_below="@id/screentime_daily"
         android:layout_marginStart="10dp"
         android:layout_marginTop="45dp"
-        android:text="Last 30days :"
+        android:text="This month:"
         android:textColor="#fff"
         android:textSize="28dp"
         android:textStyle="bold" />
     <TextView
-        android:id="@+id/screentime_time30days"
+        android:id="@+id/screentime_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/screentime_7days"
-        android:layout_marginStart="15dp"
+        android:layout_below="@id/screentime_daily"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="50dp"
-        android:layout_toEndOf="@id/screentime_yearly"
+        android:layout_toEndOf="@id/screentime_monthly"
         android:text="00h : 00m : 00s"
         android:textColor="#fff"
-        android:textSize="24dp"
-       />
+        android:textSize="28sp"
+        />
+
 
     <TextView
         android:id="@+id/screentime_yearly"
@@ -103,20 +79,22 @@
         android:layout_below="@+id/screentime_monthly"
         android:layout_marginStart="10dp"
         android:layout_marginTop="45dp"
-        android:text="Last 12 months:"
+        android:text="This year :"
         android:textColor="#fff"
         android:textSize="28dp"
         android:textStyle="bold" />
     <TextView
-        android:id="@+id/screentime_time12month"
+        android:id="@+id/screentime_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/screentime_monthly"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="50dp"
-        android:layout_toEndOf="@id/screentime_yearly"
+        android:layout_toEndOf="@id/screentime_monthly"
         android:text="00h : 00m : 00s"
         android:textColor="#fff"
-        android:textSize="24dp"
-        />
+        android:textSize="28sp"
+       />
+
+
 </RelativeLayout>
