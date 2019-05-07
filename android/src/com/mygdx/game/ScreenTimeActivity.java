@@ -31,9 +31,7 @@ public class ScreenTimeActivity extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         myDb = new DatabaseHelper(this);
-
         long today = myDb.convertDataToString(String.valueOf(simpleDateFormat.format(date)), 1);
-
 
         todayText.setText(theDiff(today));
 
@@ -46,6 +44,7 @@ public class ScreenTimeActivity extends AppCompatActivity {
         long thisYear = myDb.convertDataToString(String.valueOf(simpleDateFormat.format(date)), 3);
         yearText.setText(theDiff(thisYear));
     }
+
     public String theDiff(long ms) {
 
         long totalSecs = ms / 1000;
