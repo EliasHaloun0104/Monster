@@ -54,10 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         } else {
             return true;
-
         }
-
-
     }
 
     public long convertDataToString(String date, int choice) {
