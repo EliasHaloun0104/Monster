@@ -41,7 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean insetData(TheTimer theTimer) {
+    public boolean insertData(TheTimer theTimer) {
         SQLiteDatabase db = this.getWritableDatabase(); // it will create the database and table
 
         ContentValues contentValues = new ContentValues();
@@ -65,7 +65,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             query = "select " + COL_SCREENTIMEDURATION + "  from " +
                     TABLE_NAME + " Where " +
                     COL_DATE + " = '" + date + "'";
-
         }
         if (choice == 2) {
             query = "select " + COL_SCREENTIMEDURATION + "  from " +

@@ -344,6 +344,6 @@ public class AndroidLauncher extends AppCompatActivity {
         String theDate = simpleDateFormat.format(currentDate);
         TheTimer theTimer = new TheTimer(theDate, diff);
 
-        myDb.insetData(theTimer);
+        myDb.insertData(theTimer);
     }
 }
