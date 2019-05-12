@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -27,21 +28,19 @@ public class ScreenTimeActivity extends AppCompatActivity {
         monthText = findViewById(R.id.screentime_month);
         yearText = findViewById(R.id.screentime_year);
 
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        myDb = new DatabaseHelper(this);
-        long today = myDb.convertDataToString(String.valueOf(simpleDateFormat.format(date)), 1);
+        Intent intent = getIntent();
+        long today =  intent.getLongExtra("Today",0);
+        long thisMonth =  intent.getLongExtra("This Month",0);
+        long thisYear =  intent.getLongExtra("This Year",0);
+
+
 
         todayText.setText(theDiff(today));
 
-        simpleDateFormat = new SimpleDateFormat("yyyy-MM");
 
-        long thisMonth = myDb.convertDataToString(String.valueOf(simpleDateFormat.format(date)), 2);
         monthText.setText(theDiff(thisMonth));
 
-        simpleDateFormat = new SimpleDateFormat("yyyy");
-        long thisYear = myDb.convertDataToString(String.valueOf(simpleDateFormat.format(date)), 3);
         yearText.setText(theDiff(thisYear));
     }
 
