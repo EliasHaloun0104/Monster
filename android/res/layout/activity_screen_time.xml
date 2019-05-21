@@ -33,20 +33,19 @@
         android:textStyle="bold" />
 
 
-
     <TextView
         android:id="@+id/screentime_todayTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
         android:layout_below="@id/screentime_title"
-
         android:layout_marginStart="40dp"
+
+        android:layout_marginTop="104dp"
         android:layout_toEndOf="@id/screentime_monthly"
         android:text="00h : 00m : 00s"
         android:textColor="#fff"
-        android:textSize="28sp"
-         />
+        android:textSize="28sp" />
+
     <TextView
         android:id="@+id/screentime_monthly"
         android:layout_width="wrap_content"
@@ -58,6 +57,7 @@
         android:textColor="#fff"
         android:textSize="28dp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/screentime_month"
         android:layout_width="wrap_content"
@@ -68,8 +68,7 @@
         android:layout_toEndOf="@id/screentime_monthly"
         android:text="00h : 00m : 00s"
         android:textColor="#fff"
-        android:textSize="28sp"
-        />
+        android:textSize="28sp" />
 
 
     <TextView
@@ -83,6 +82,7 @@
         android:textColor="#fff"
         android:textSize="28dp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/screentime_year"
         android:layout_width="wrap_content"
@@ -93,8 +93,24 @@
         android:layout_toEndOf="@id/screentime_monthly"
         android:text="00h : 00m : 00s"
         android:textColor="#fff"
-        android:textSize="28sp"
-       />
+        android:textSize="28sp" />
+
+    <Button
+        android:id="@+id/screentime_updateBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/screentime_yearly"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="30dp"
+        android:background="#fff"
+        android:elevation="4dp"
+        android:padding="10dp"
+        android:text="@string/update"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

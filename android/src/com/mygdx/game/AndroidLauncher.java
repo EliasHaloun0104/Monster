@@ -165,26 +165,7 @@ public class AndroidLauncher extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AndroidLauncher.this,ScreenTimeActivity.class);
-
-
-                Date date = new Date(System.currentTimeMillis());
-
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                long today = myDb.convertDataToString(String.valueOf(simpleDateFormat.format(date)), 1);
-                intent.putExtra("Today",today);
-
-
-                simpleDateFormat = new SimpleDateFormat("yyyy-MM");
-                long thisMonth = myDb.convertDataToString(String.valueOf(simpleDateFormat.format(date)), 2);
-                intent.putExtra("This Month",thisMonth);
-
-                simpleDateFormat = new SimpleDateFormat("yyyy");
-                long thisYear = myDb.convertDataToString(String.valueOf(simpleDateFormat.format(date)), 3);
-                intent.putExtra("This Year",thisYear);
-
-
                 startActivity(intent);
-
 
             }
         });

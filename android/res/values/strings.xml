@@ -43,6 +43,7 @@
     <string name="screen_time">Screen Time</string>
     <string name="screen_time_usage">Screen Time Usage...</string>
     <string name="today">Today :</string>
+    <string name="update">Update</string>
 
 
 </resources>
