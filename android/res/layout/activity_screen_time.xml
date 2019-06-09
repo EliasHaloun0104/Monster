@@ -112,6 +112,16 @@
         android:textColor="#fff"
         android:textSize="28sp" />
 
+    <EditText
+        android:id="@+id/emailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/screentime_updateBtn"
+        android:layout_marginTop="30dp"
+        android:ems="40"
+        android:inputType="textEmailAddress"
+        android:textColor="#fff" />
+
     <Button
         android:id="@+id/screentime_updateBtn"
         android:layout_width="150dp"
@@ -119,8 +129,8 @@
         android:layout_below="@+id/screentime_yearly"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="32dp"
         android:background="#fff"
         android:elevation="4dp"
         android:padding="10dp"
