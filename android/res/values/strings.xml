@@ -44,6 +44,7 @@
     <string name="screen_time_usage">Screen Time Usage...</string>
     <string name="today">Today :</string>
     <string name="update">Update</string>
+    <string name="ParentNote">Parent Control</string>
 
 
 </resources>
